@@ -8,19 +8,29 @@ body{
     color: white ;
 }
 
+/* NAVBAR  */
+#img-logo{
+    width: 350px;
+    margin-right: 30px;
+}
 .navbar-expand-lg{
     background-color: #481A5C;
 }
 
-#navbarSupportedContent ul{
-    display: flex;
-    justify-content: space-between;
+#navBar{
+    border: solid red 2px;
 }
 
-#navbarSupportedContent a {
+#navbarSupportedContent a{
     color: white !important;
 }
 
+
+#navbarSupportedContent{
+    border: solid red 2px;
+}
+
+/* SECCION IMAGENES DE PRODUCTOS */
 #img-productos{
     display: flex;
     gap: 50px;
@@ -29,11 +39,7 @@ body{
     align-items: center;
 }
 
-#img-productos img{
+#img-productos a img{
     width: 100%;
 }
 
-#img-logo{
-    width: 350px;
-    margin-right: 30px;
-}
