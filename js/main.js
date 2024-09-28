@@ -1,6 +1,6 @@
 const contenedorNav = document.getElementById("header-container");
 const navHTML = `
-          <nav class="navbar navbar-expand-lg" id="navBar">
+    <nav class="navbar navbar-expand-xl" id="navBar">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html"><img id="img-logo" src="./img/Blue Illustration Game Presentation-Photoroom.png" alt=""></a>
             <button
@@ -12,7 +12,7 @@ const navHTML = `
                 aria-expanded="false"
                 aria-label="Toggle navigation"
                 id="togglerBar">
-                <span class="navbar-toggler-icon"></span>
+                <i class="fa-solid fa-bars" id="toggle-bars"></i>
             </button>
     
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
