@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    position: relative; /* Necesario para el pseudo-elemento */
+    background: url("../img/bk-login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+
+#section-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 80px;
+    width: 100%;
+    max-width: 500px; /* Ajuste para que no se haga muy pequeño */
+    background-color: #1d183f; /* Fondo para destacar el main */
+    box-shadow: 0px 0px 20px 8px #fbb1a296;
+    margin: auto;
+}
+
+.div-flex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+#div-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px; /* Espacio entre botones */
+}
+
+.btn-form-login {
+    flex: 1; /* Los botones ocupan el mismo espacio */
+    padding: 10px;
+    background-color: rgba(69, 69, 69, 0.589);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+input {
+    width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
+    padding: 10px;
+    border: 1px solid #633bc0;
+    background-color: #3333337c;
+    color: white;
+}
+
+input:focus{
+    box-shadow: 0px 0px 10px 2px #a065bb;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 10px;
+        max-width: 90%; /* Más flexibilidad para pantallas pequeñas */
+    }
+}
