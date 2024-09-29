@@ -38,3 +38,12 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+
+#exampleModalLabel, #exampleModalLabel form{
+    color: black;
+}
+
+.form-label,.modal-body{
+    color:black
+}

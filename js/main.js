@@ -20,12 +20,15 @@ const navHTML = `
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="./procesadores.html">Procesadores</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="./placas.html">Placas de video</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="./memorias.html">Memorias RAM</a>
                     </li>
@@ -43,7 +46,7 @@ const navHTML = `
 
 contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
 
-
+//INSERCIÓN DINÁMICA DE FOOTER
 const contenedorFooter = document.querySelector("footer");
 const footer = `
     <div class="copyright">
@@ -59,5 +62,57 @@ const footer = `
 
     contenedorFooter.insertAdjacentHTML("afterbegin", footer);
 
+    const modalRegistroNombre = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">¡Bienvenido!</h1>
+                </div>
+                <div class="modal-body">
+                    <p>Ingrese su nombre para ver nuestros productos 💻</p>
+                    <form id="nameForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div id="textHelp" class="form-text">Este campo no puede estar vacío</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>`
 
+    const contenedorModal = document.getElementById("nameRegisterModal");
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const name = localStorage.getItem('userName');
+        contenedorModal.insertAdjacentHTML("afterbegin", modalRegistroNombre);
+        
+        const nameRegisterModal = new bootstrap.Modal(document.getElementById('nameRegisterModal'));
+    
+        if (!name) {
+            nameRegisterModal.show();
+        }
+    
+        document.getElementById('nameForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const userName = document.getElementById('name').value.trim();
+    
+            if (userName) {
+                // Guardamos el nombre en localStorage
+                localStorage.setItem('userName', userName);
+                // Ocultamos el modal
+                nameRegisterModal.hide();
+            }
+        });
+    
+        document.querySelectorAll('a.nav-link, #img-productos a').forEach(link => {
+            link.addEventListener('click', (event) => {
+                if (!localStorage.getItem('userName')) {
+                    event.preventDefault();
+                    nameRegisterModal.show();
+                }
+            });
+        });
+    });
+    
