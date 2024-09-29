@@ -70,17 +70,20 @@ a{
 
 
 /* SECCION IMAGENES DE PRODUCTOS */
-/* #img-productos{
-    display: flex;
+#img-productos {
+    display: grid;
     gap: 50px;
     padding: 50px;
     justify-content: center;
     align-items: center;
+    grid-template-columns: repeat(2, 1fr); /* Por defecto, dos columnas */
 }
 
-#img-productos a img{
+#img-productos a img {
     width: 100%;
-} */
+}
+
+
 /* FOOTER */
 footer {
     display: flex;
@@ -144,19 +147,6 @@ footer {
 
 
 
-/* SECCION IMAGENES DE PRODUCTOS */
-#img-productos {
-    display: grid;
-    gap: 50px;
-    padding: 50px;
-    justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(2, 1fr); /* Por defecto, dos columnas */
-}
-
-#img-productos a img {
-    width: 100%;
-}
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 1000px) {
