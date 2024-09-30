@@ -29,13 +29,21 @@ a{
     background-color: #481A5C;
 }
 
-#togglerBar{
-    border: solid 1px #f8a5c8;
+#navbarSupportedContent .nav-link:hover {
+    color: rgb(201, 0, 174) !important;
+}
+
+#togglerBar, .navbar-toggler.collapsed{
+    border: none;
 }
 #toggle-bars{
     color: #f8a5c8;
+    font-size: 1.8rem;
 }
-
+#togglerBar.navbar.toggler{
+    color: #f8a5c8;
+    font-size: 1.8rem;
+}
 
 
 #navbarSupportedContent a{
@@ -145,13 +153,9 @@ footer {
     }
 }
 
-
-
-
-/* MEDIA QUERIES */
 @media screen and (min-width: 1000px) {
     #img-productos {
-        grid-template-columns: repeat(3, 1fr); /* A partir de 1000px, tres columnas */
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

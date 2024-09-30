@@ -33,8 +33,7 @@ const navHTML = `
                         <a class="nav-link" href="./memorias.html">Memorias RAM</a>
                     </li>
                 </ul>
-                <button class="btn" type="button" id="loginButton"><a href="./login.html">Login</a></button>
-                
+                <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="placas de video" aria-label="Search" />
                     <button class="btn btn-outline-success me-2" type="submit" id="buscarBtn">Buscar</button>
@@ -63,54 +62,56 @@ const footer = `
     contenedorFooter.insertAdjacentHTML("afterbegin", footer);
 
     const modalRegistroNombre = `
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">¡Bienvenido!</h1>
-                </div>
-                <div class="modal-body">
-                    <p>Ingrese su nombre para ver nuestros productos 💻</p>
-                    <form id="nameForm">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" required>
-                            <div id="textHelp" class="form-text">Este campo no puede estar vacío</div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
+        <div class="modal fade" id="nameRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">¡Bienvenido!</h1>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ingrese su nombre para ver nuestros productos 💻</p>
+                        <form id="nameForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="name" required>
+                                <div id="textHelp" class="form-text">Este campo no puede estar vacío</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>`
 
-    const contenedorModal = document.getElementById("nameRegisterModal");
-
     document.addEventListener('DOMContentLoaded', () => {
+        document.body.insertAdjacentHTML("afterbegin", modalRegistroNombre);
+
         const name = localStorage.getItem('userName');
-        contenedorModal.insertAdjacentHTML("afterbegin", modalRegistroNombre);
-        
-        const nameRegisterModal = new bootstrap.Modal(document.getElementById('nameRegisterModal'));
+        //inicializo un modal con Bootstrap
+        const modal = new bootstrap.Modal(document.getElementById('nameRegisterModal'));
     
+        //si el nombre no esta guardado en el localStorage, muestro el modal
         if (!name) {
-            nameRegisterModal.show();
+            modal.show();
         }
     
         document.getElementById('nameForm').addEventListener('submit', (event) => {
+            //evita que se recargue la página cuando se envía el form
             event.preventDefault();
-            const userName = document.getElementById('name').value.trim();
-    
+            const userName = document.getElementById('name').value;
+        
+            //si no esta vacío el input, lo guarda en localStorage
             if (userName) {
-                // Guardamos el nombre en localStorage
                 localStorage.setItem('userName', userName);
-                // Ocultamos el modal
-                nameRegisterModal.hide();
+                modal.hide();//oculto el modal
             }
         });
-    
+        
         document.querySelectorAll('a.nav-link, #img-productos a').forEach(link => {
             link.addEventListener('click', (event) => {
                 if (!localStorage.getItem('userName')) {
                     event.preventDefault();
-                    nameRegisterModal.show();
+                    modal.show();
                 }
             });
         });
