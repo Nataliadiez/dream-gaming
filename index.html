@@ -1,105 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous"
-    />
-    <link rel="icon" type="image/png" href="./img/favicon.png">
-    <link rel="stylesheet" href="./style/style.css"/>
-    <link rel="stylesheet" href="./style/home.css"/>
-    <title>Home</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="./style/home.css"/>
+        <title>Home</title>
     </head>
     
     <body>
-      <!-- Header y nav section -->
-      <header id="header-container"></header>
+        <!-- Header y nav section -->
+        <header id="header-container"></header>
 
     <!-- Carrousel section -->
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
+                <div class="carousel-item active">
                 <img src="https://fastly.jsdelivr.net/gh/persano/BannersWebMaximus/top-slider/hDDP2024.webp" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
+                </div>
+            <div class="carousel-item">
                 <img src="https://fastly.jsdelivr.net/gh/persano/BannersWebMaximus/top-slider/hRazer2024.webp" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
+                </div>
+                <div class="carousel-item">
                 <img src="https://fastly.jsdelivr.net/gh/persano/BannersWebMaximus/top-slider/Hatp2024.webp" class="d-block w-100" alt="...">
-              </div>
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
-          </div>
+        </div>
 
 <!-- Imagenes productos section -->
-    <section>
         <div class="container" id="img-productos">
             <a href="./memorias.html"><img src="./img/Memorias ram.png" alt=""></a>
             <a href="./placas.html"><img src="./img/PLACAS.png" alt=""></a>
             <a href="./procesadores.html"><img src="./img/PROCESADORES.png" alt=""></a>
         </div>
-    </section>
-    
-<!-- Cards con productos -->
-<div class="container" id="cards-container">
-  <div class="row">
-      <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-          <div class="card">
-              <img src="https://ultimainformatica.com/2032466-thickbox_default/gigabyte-radeon-rx-6500-xt-eagle-4g-amd-4-gb-gddr6.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">Gigabyte Radeon RX 6500 XT EAGLE 4G AMD 4 GB GDDR6</h5>
-                  <p class="card-text">Familia de procesadores de gráficos: AMD, Procesador gráfico: Radeon RX 6500 XT.</p>
-                  <a href="#" class="btn btn-card">Ver más</a>
-              </div>
-          </div>
-      </div>
 
-      <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-          <div class="card">
-              <img src="https://ultimainformatica.com/1304957-thickbox_default/amd-ryzen-5-5600-procesador-35-ghz-32-mb-l3-caja.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">AMD Ryzen 5 5600</h5>
-                  <p class="card-text">Familia de procesador: AMD Ryzen™ 5, Socket de procesador: Zócalo AM4, Litografía del procesador: 7 nm.</p>
-                  <a href="#" class="btn btn-card">Ver más</a>
-              </div>
-          </div>
-      </div>
+        <!-- Cards con productos -->
+        <div class="container" id="cards-container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3 mb-4 card-wrapper">
+                    <div class="card">
+                        <img src="https://ultimainformatica.com/2032466-thickbox_default/gigabyte-radeon-rx-6500-xt-eagle-4g-amd-4-gb-gddr6.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Gigabyte Radeon RX 6500 XT EAGLE 4G AMD 4 GB GDDR6</h5>
+                            <p class="card-text">Familia de procesadores de gráficos: AMD, Procesador gráfico: Radeon RX 6500 XT.</p>
+                            <a href="#" class="btn btn-card">Ver más</a>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-          <div class="card">
-              <img src="https://ultimainformatica.com/2865970-thickbox_default/kingston-technology-fury-beast-rgb-modulo-de-memoria-32-gb-2-x-16-gb-ddr5.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">Kingston Technology Fury Beast RGB 32GB (2x16GB) 4800MHz CL38 DDR5</h5>
-                  <p class="card-text">Kingston Technology FURY Beast RGB. Componente para: PC/servidor, Memoria interna: 32 GB</p>
-                  <a href="#" class="btn btn-card">Ver más</a>
+              <div class="col-sm-6 col-md-6 col-lg-3 mb-4 card-wrapper">
+                  <div class="card">
+                      <img src="https://ultimainformatica.com/1304957-thickbox_default/amd-ryzen-5-5600-procesador-35-ghz-32-mb-l3-caja.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title">AMD Ryzen 5 5600</h5>
+                          <p class="card-text">Familia de procesador: AMD Ryzen™ 5, Socket de procesador: Zócalo AM4, Litografía del procesador: 7 nm.</p>
+                          <a href="#" class="btn btn-card">Ver más</a>
+                      </div>
+                  </div>
               </div>
-          </div>
-      </div>
 
-      <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-          <div class="card">
-              <img src="https://ultimainformatica.com/2457056-thickbox_default/gigabyte-geforce-rtx-4060-ti-eagle-8g-nvidia-8-gb-gddr6.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">Gigabyte GeForce RTX 4060 Ti EAGLE 8G.</h5>
-                  <p class="card-text">Familia de procesadores de gráficos: NVIDIA, Procesador gráfico: GeForce RTX 4060 Ti.</p>
-                  <a href="#" class="btn btn-card">Ver más</a>
+              <div class="col-sm-6 col-md-6 col-lg-3 mb-4 card-wrapper">
+                  <div class="card">
+                      <img src="https://ultimainformatica.com/2865970-thickbox_default/kingston-technology-fury-beast-rgb-modulo-de-memoria-32-gb-2-x-16-gb-ddr5.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title">Kingston Technology Fury Beast RGB 32GB (2x16GB) 4800MHz CL38 DDR5</h5>
+                          <p class="card-text">Kingston Technology FURY Beast RGB. Componente para: PC/servidor, Memoria interna: 32 GB</p>
+                          <a href="#" class="btn btn-card">Ver más</a>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-sm-6 col-md-6 col-lg-3 mb-4 card-wrapper">
+                  <div class="card">
+                      <img src="https://ultimainformatica.com/2457056-thickbox_default/gigabyte-geforce-rtx-4060-ti-eagle-8g-nvidia-8-gb-gddr6.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title">Gigabyte GeForce RTX 4060 Ti EAGLE 8G.</h5>
+                          <p class="card-text">Familia de procesadores de gráficos: NVIDIA, Procesador gráfico: GeForce RTX 4060 Ti.</p>
+                          <a href="#" class="btn btn-card">Ver más</a>
+                      </div>
+                  </div>
               </div>
           </div>
       </div>
-  </div>
-</div>
 
 
     <section>

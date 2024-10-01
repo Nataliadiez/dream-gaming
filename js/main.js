@@ -12,7 +12,7 @@ const navHTML = `
                 aria-expanded="false"
                 aria-label="Toggle navigation"
                 id="togglerBar">
-                <i class="fa-solid fa-bars" id="toggle-bars"></i>
+                <i class="bi bi-list" id="toggle-bars"></i>
             </button>
     
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -43,9 +43,17 @@ const navHTML = `
     </nav>
 `;
 
-contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
+const linksCDN = `
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/png" href="./img/favicon.png">
+    <link rel="stylesheet" href="./style/style.css"/>`
 
-//INSERCIÓN DINÁMICA DE FOOTER
 const contenedorFooter = document.querySelector("footer");
 const footer = `
     <div class="copyright">
@@ -53,12 +61,15 @@ const footer = `
     </div>
 
     <div class="social-icons">
-        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.facebook.com/?locale=es_LA" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
-        <a href="https://www.tiktok.com/" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="https://x.com/home?lang=es" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.facebook.com/?locale=es_LA" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.tiktok.com/" target="_blank"><i class="bi bi-tiktok"></i></a>
+        <a href="https://x.com/home?lang=es" target="_blank"><i class="bi bi-twitter-x"></i></a>
     </div>`
 
+// INSERCIÓN DINÁMICA DE TODOS LOS COMPONENTES
+    contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
+    document.head.insertAdjacentHTML("afterbegin", linksCDN);
     contenedorFooter.insertAdjacentHTML("afterbegin", footer);
 
     const modalRegistroNombre = `

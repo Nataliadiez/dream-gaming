@@ -33,18 +33,12 @@ a{
     color: rgb(201, 0, 174) !important;
 }
 
-#togglerBar, .navbar-toggler.collapsed{
+
+#togglerBar{
+    color: #f8a5c8 !important;
+    font-size: 1.8rem !important;
     border: none;
 }
-#toggle-bars{
-    color: #f8a5c8;
-    font-size: 1.8rem;
-}
-#togglerBar.navbar.toggler{
-    color: #f8a5c8;
-    font-size: 1.8rem;
-}
-
 
 #navbarSupportedContent a{
     color: white !important;
@@ -74,21 +68,6 @@ a{
     background-color: rgb(201, 0, 174);
     color: white;
     border: solid 1px rgb(201, 0, 174);
-}
-
-
-/* SECCION IMAGENES DE PRODUCTOS */
-#img-productos {
-    display: grid;
-    gap: 50px;
-    padding: 50px;
-    justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(2, 1fr); /* Por defecto, dos columnas */
-}
-
-#img-productos a img {
-    width: 100%;
 }
 
 
@@ -122,11 +101,11 @@ footer {
     margin-right: auto;
 }
 
-.fa-brands{
+.bi{
     font-size: 1.5rem;
 }
 
-.fa-brands:hover{
+.bi:hover{
     color: #E8428A;
 }
 
@@ -136,6 +115,28 @@ footer {
     #img-logo{
         width: 15rem;
         margin-right: 0px;
+    }
+}
+@media screen and (max-width:1199px){
+    #navBar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+    #navBar li{
+    border-bottom: solid 2px #351344;
+    margin: 0;
+    padding: 0;
+    }
+    #loginButton{
+        margin: 20px 0px;
+        width: 100%;
+    }
+    #buscarBtn{
+        width: 40%;
     }
 }
 @media screen and (max-width:1000px) {
@@ -153,11 +154,7 @@ footer {
     }
 }
 
-@media screen and (min-width: 1000px) {
-    #img-productos {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
+
 
 
 
