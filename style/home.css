@@ -9,6 +9,7 @@
 .container .card{
     background-color: #a155d33a;
     color: white;
+
 }
 
 .btn-card{
@@ -74,11 +75,16 @@
     #cards-container .card-wrapper {
         flex: 0 0 50%;
         max-width: 50%;
+        padding: 0px 5px;
+    }
+    #cards-container{
+        padding: 0;
     }
 }
 @media screen and (min-width: 1000px) {
     #img-productos {
         grid-template-columns: repeat(3, 1fr);
+        
     }
 }
 
