@@ -34,10 +34,13 @@ const navHTML = `
                     </li>
                 </ul>
                 <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
-                <form class="d-flex" role="search">
+                <a href="/carrito.html"><i class="bi bi-cart2"></i></a>
+
+                <!--barra de busqueda comentada por el momento-->
+                <!-- <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="placas de video" aria-label="Search" />
                     <button class="btn btn-outline-success me-2" type="submit" id="buscarBtn">Buscar</button>
-                </form>
+                </form>-->
             </div>
         </div>
     </nav>

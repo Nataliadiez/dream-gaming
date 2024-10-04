@@ -11,7 +11,6 @@ body {
     font-size: 1rem;
 }
 
-
 body::before {
     content: "";
     position: absolute;
@@ -22,7 +21,6 @@ body::before {
     background: rgba(0, 0, 0, 0.5);
     z-index: -1;
 }
-
 
 #section-login {
     display: flex;
@@ -49,11 +47,11 @@ body::before {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 10px; /* Espacio entre botones */
+    gap: 10px;
 }
 
 .btn-form-login {
-    flex: 1; /* Los botones ocupan el mismo espacio */
+    flex: 1;
     padding: 10px;
     background-color: rgba(69, 69, 69, 0.589);
     color: white;

@@ -1,0 +1,51 @@
+#ticketCompras{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+}
+
+.unidadCompra{
+    display: flex;
+    border: solid 1px #ffbef3;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 50px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.imgProducto{
+    width: 10%;
+}
+
+.div-flex{
+    display: flex;
+}
+
+#divCant{
+    gap: 50px;
+}
+
+.inputCantidad{
+    width: 50px;
+    background-color: #481a5c81;
+    color: white;
+    text-align: center;
+    border: none;
+    margin: 0 5px;
+}
+
+.contenedorCantidad{
+    display: flex;
+    align-items: center;
+}
+
+/* Para Chrome, Safari, Edge y Opera */
+#cantidadProducto::-webkit-outer-spin-button,
+#cantidadProducto::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

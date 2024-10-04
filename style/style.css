@@ -83,7 +83,7 @@ footer {
     box-sizing: border-box;
     background: url("../img/footerimg.png") no-repeat center center;
     background-size: cover;
-    margin-top: 100px;
+    margin-top: auto;
 
     font-family: "Roboto", sans-serif;
     font-weight: 400;
