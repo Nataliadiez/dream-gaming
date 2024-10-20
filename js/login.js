@@ -1,40 +1,19 @@
 import Usuario from './usuario.js';
 
-let tituloFormulario = document.getElementById("titulo-form");
-let lblNombre = document.getElementById("lbl-nombre");
-let inputNombre = document.getElementById("nombre");
+const btnAccesoRapido = document.querySelector("#acceso-rapido");
+const email = document.querySelector("#email");
+const password = document.querySelector("#password");
 
-const login = () => {
-    tituloFormulario.innerHTML = "Formulario de logueo";
-    lblNombre.style.display = "none";
-    inputNombre .style.display = "none";
-    
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    if (email !== "" && password !== "") {
-        logueo(email, password);
+const validacionInputs = () => {
+    if (email.value !== "" && password.value !== "") {
+        login(email.value, password.value);
     } else {
         alert("Los campos no pueden estar vacíos");
     }
 };
 
-const register = () => {
-    tituloFormulario.innerHTML = "Formulario de registro";
-    lblNombre.style.display = "block";
-    inputNombre .style.display = "block";
-    const nombre = document.getElementById("nombre").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    if (nombre !== "" && email !== "" && password !== "") {
-        Usuario.registrarUsuario(nombre, email, password);
-    } else {
-        alert("Los campos no pueden estar vacíos");
-    }
-};
-
-const logueo = (email, password) => {
+const login = (email, password) => {
     const resultado = Usuario.login(email, password);
-
     if (resultado === "Verificado") {
         alert("Bienvenido, " + email);
     } else {
@@ -42,8 +21,12 @@ const logueo = (email, password) => {
     }
 };
 
+const accederRapido = () => {
+    Usuario.crearUsuarioPredeterminado();
+    const usuarioPredeterminado = Usuario.obtenerUsuarios()[0];
+    email.value = usuarioPredeterminado.email;
+    password.value = usuarioPredeterminado.password;
+}
 
-
-
-document.getElementById("login").addEventListener("click", login);
-document.getElementById("register").addEventListener("click", register);
+document.getElementById("login").addEventListener("click", validacionInputs);
+btnAccesoRapido.addEventListener("click", accederRapido)

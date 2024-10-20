@@ -1,22 +1,24 @@
 class Usuario {
-    constructor(nombre, email, password) {
-        this.nombre = nombre;
+    email;
+    password;
+    constructor(email, password) {
         this.email = email;
-        this.password = password; // Cambié de "clave" a "password"
+        this.password = password;
     }
-
-    static registrarUsuario(nombre, email, password) {
-        const user = new Usuario(nombre, email, password);
-        let listaUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-        listaUsuarios.push(user);
-        localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
-        alert("Usuario registrado exitosamente!");
-    }
-
     static obtenerUsuarios() {
         return JSON.parse(localStorage.getItem("usuarios")) || [];
     }
-
+    static crearUsuarioPredeterminado() {
+        let usuarioCreado = false;
+        if (this.obtenerUsuarios().length === 0) {
+            const usuarioFijo = new Usuario("administrador123@gmail.com", "password123");
+            const usuarios = [];
+            usuarios.push(usuarioFijo);
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+            usuarioCreado = true;
+        }
+        return usuarioCreado;
+    }
     static login(email, password) {
         const usuariosRegistrados = this.obtenerUsuarios();
         const usuarioEncontrado = usuariosRegistrados.find(user => user.email === email);

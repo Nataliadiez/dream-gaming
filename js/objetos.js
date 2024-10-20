@@ -1,5 +1,6 @@
- const contenidoCards = [
+const contenidoCards = [
     {
+      id: 1,
       imgSrc: "https://ultimainformatica.com/2032466-thickbox_default/gigabyte-radeon-rx-6500-xt-eagle-4g-amd-4-gb-gddr6.jpg",
       titulo: "Gigabyte Radeon RX 6500 XT",
       precio: 650000,
@@ -7,6 +8,7 @@
       link: "#"
     },
     {
+      id: 2,
       imgSrc: "https://ultimainformatica.com/1303926-thickbox_default/amd-ryzen-5-5600x-procesador-37-ghz-32-mb-l3-caja-1.jpg",
       titulo: "AMD Ryzen 5 5600X",
       precio: 980000,
@@ -15,6 +17,7 @@
     },
     // Añade más objetos para cada tarjeta aquí
     {
+      id: 3,
       imgSrc: "https://ultimainformatica.com/1304957-thickbox_default/amd-ryzen-5-5600-procesador-35-ghz-32-mb-l3-caja.jpg",
       titulo: "AMD Ryzen 5 5600",
       precio: 1050020,
@@ -22,6 +25,7 @@
       link: "#"
     },
     {
+      id: 4,
       imgSrc: "https://ultimainformatica.com/2766517-thickbox_default/intel-core-i3-13100f-procesador-12-mb-smart-cache-caja.jpg",
       titulo: "Intel Core i3 13100F",
       precio: 1500000,
@@ -29,6 +33,7 @@
       link: "#"
     },
     {
+      id: 5,
       imgSrc: "https://ultimainformatica.com/2767938-thickbox_default/intel-core-i7-12700f-procesador-25-mb-smart-cache-caja.jpg",
       titulo: "Intel Core i7 12700F",
       precio: 1300000,
@@ -36,6 +41,7 @@
       link: "#"
     },
     {
+      id: 6,
       imgSrc: "https://ultimainformatica.com/1095581-thickbox_default/amd-ryzen-5-pro-5650g-procesador-39-ghz-16-mb-l3.jpg",
       titulo: "AMD Ryzen 5 PRO 5650G procesador 3,9 GHz 16 MB L3",
       precio: 1900000,
@@ -43,6 +49,7 @@
       link: "#"
     },
     {
+      id: 7,
       imgSrc: "https://ultimainformatica.com/1387356-thickbox_default/amd-ryzen-7-7700x-procesador-45-ghz-32-mb-l3-caja.jpg",
       titulo: "AMD Ryzen 7 7700X",
       precio: 900000,
@@ -50,6 +57,7 @@
       link: "#"
     },
     {
+      id: 8,
       imgSrc: "https://ultimainformatica.com/2340764-thickbox_default/intel-core-i9-11900k-procesador-35-ghz-16-mb-smart-cache-caja.jpg",
       titulo: "Intel Core i9 11900K",
       precio: 980000,
@@ -57,6 +65,7 @@
       link: "#"
     },
     {
+      id: 9,
       imgSrc: "https://ultimainformatica.com/2826535-thickbox_default/cpu-amd-ryzen-5-8500g.jpg",
       titulo: "CPU AMD RYZEN 5 8500G",
       precio: 700000,
