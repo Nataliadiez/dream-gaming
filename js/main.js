@@ -33,6 +33,7 @@ const navHTML = `
                         <a class="nav-link" href="./memorias.html">Memorias RAM</a>
                     </li>
                 </ul>
+                <button id="btn-modo" class="btn"><i class="bi bi-brightness-high"></i></button>
                 <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
                 <a href="/carrito.html"><i class="bi bi-cart2"></i></a>
 
@@ -55,7 +56,8 @@ const linksCDN = `
         crossorigin="anonymous"
     />
     <link rel="icon" type="image/png" href="./img/favicon.png">
-    <link rel="stylesheet" href="./style/style.css"/>`
+    <link rel="stylesheet" href="./style/style.css"/>
+    <link rel="stylesheet" href="./style/modoClaro.css"/>`
 
 const contenedorFooter = document.querySelector("footer");
 const footer = `
@@ -130,4 +132,5 @@ const footer = `
             });
         });
     });
+
     
