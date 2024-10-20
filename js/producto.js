@@ -37,7 +37,7 @@ export default class Producto {
             <div class="card-body">
                 <h5 class="card-title">${this.titulo}</h5>
                 <p class="card-text">$${this.precio}</p>
-                <a href="detalleProducto.html" class="btn btn-card">Ver más</a>
+                <a href="detalleProducto.html?id=${this.id}" class="btn btn-card">Ver más</a>
             </div>
         </div>
         `;
