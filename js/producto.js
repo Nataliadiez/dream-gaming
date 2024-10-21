@@ -7,6 +7,7 @@ export default class Producto {
     link;
     cantidad;
     disponible;
+    categoria;
 
     constructor(
         id,
@@ -16,7 +17,8 @@ export default class Producto {
         descripcion,
         link,
         cantidad,
-        disponible
+        disponible,
+        categoria
     ) {
         this.id = id;
         this.img = img;
@@ -26,6 +28,7 @@ export default class Producto {
         this.link = link;
         this.cantidad = cantidad;
         this.disponible = disponible;
+        this.categoria = categoria;
     }
 
     mostrarCards() {
@@ -37,7 +40,7 @@ export default class Producto {
             <div class="card-body">
                 <h5 class="card-title">${this.titulo}</h5>
                 <p class="card-text">$${this.precio}</p>
-                <a href="detalleProducto.html?id=${this.id}" class="btn btn-card">Ver más</a>
+                <a href="detalleProducto.html?id=${this.id}&categoria=${this.categoria}" class="btn btn-card">Ver más</a>
             </div>
         </div>
         `;

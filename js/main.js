@@ -57,7 +57,9 @@ const linksCDN = `
     />
     <link rel="icon" type="image/png" href="./img/favicon.png">
     <link rel="stylesheet" href="./style/style.css"/>
-    <link rel="stylesheet" href="./style/modoClaro.css"/>`
+    `
+    //corté el modo claro para ver los colores del oscuro
+    //<link rel="stylesheet" href="./style/modoClaro.css"/> 
 
 const contenedorFooter = document.querySelector("footer");
 const footer = `

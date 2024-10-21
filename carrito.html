@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/carrito.css">
     <title>Carrito</title>
 </head>
+
 <body>
     <header id="header-container"></header>
     <h1>Carrito de compras</h1>
-    <div class="container" id="ticketCompras">
-        <div class="unidadCompra">
-            <img class="imgProducto" src="https://ultimainformatica.com/2815320-thickbox_default/asus-tuf-gaming-tuf-rtx4070s-o12g-gaming-nvidia-geforce-rtx-4070-super-12-gb-gddr6x.jpg" alt="">
-            <div class="div-col">
-                <h5>Placa de video</h5>
-                <p>Descripción: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda consectetur praesentium quaerat dolores labore expedita omnis consequuntur, exercitationem accusantium iusto nisi nobis in sapiente a. Tempore voluptatum dolore ut itaque?</p>
-            </div>
+    <div class="container" id="contenedor-carrito">
 
-            <div class="div-flex contenedorCantidad">
-                <button id="decremento" class="btn btn-primary" onclick="cambiarCantidad(-1)">-</button>
-                <input readl type="number" id="cantidadProducto" class="inputCantidad" value="1">
-                <button id="incremento" class="btn btn-primary" onclick="cambiarCantidad(1)">+</button>
-            </div>
+    </div>
+    <button class="btn btn-primary">Comprar</button>
+    </div>
 
-            <div class="div-flex">
-                <p>Precio: $1.250.366</p>
+    <!-- Modal para confirmar la eliminación del item del carrito -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEliminarLabel">Eliminar Producto</h5>
+                    <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar el producto <span id="nombreProducto"></span> del carrito?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" id="confirmarEliminar">Sí, eliminar</button>
+                </div>
             </div>
         </div>
-
-        <div class="unidadCompra">
-            <img class="imgProducto" src="https://ultimainformatica.com/2815320-thickbox_default/asus-tuf-gaming-tuf-rtx4070s-o12g-gaming-nvidia-geforce-rtx-4070-super-12-gb-gddr6x.jpg" alt="">
-            <div class="div-col">
-                <h5>Placa de video</h5>
-                <p>Descripción: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda consectetur praesentium quaerat dolores labore expedita omnis consequuntur, exercitationem accusantium iusto nisi nobis in sapiente a. Tempore voluptatum dolore ut itaque?</p>
-            </div>
-
-            <div class="div-flex contenedorCantidad">
-                <button id="decremento" class="btn btn-primary" onclick="cambiarCantidad(-1)">-</button>
-                <input readl type="number" id="cantidadProducto" class="inputCantidad" value="1">
-                <button id="incremento" class="btn btn-primary" onclick="cambiarCantidad(1)">+</button>
-            </div>
-
-            <div class="div-flex">
-                <p>Precio: $1.250.366</p>
-            </div>
     </div>
 
 
-        <button class="btn btn-primary">Comprar</button>
-    </div>
 
 
     <footer></footer>
 
     <!-- Sección de scripts -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"
-    ></script>
+        crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
     <script src="./js/carrito.js"></script>
 </body>
+
 </html>

@@ -8,12 +8,19 @@ const cardsPorPagina = 6;
 let paginaActual = 0;
 let contenidoCards = [];
 
+const path = window.location.pathname;
+const archivoActual = path.substring(path.lastIndexOf("/") + 1);
+const categoria = archivoActual.split(".")[0];
+
 const cargarProductos = async() => {
   try{
-    const respuesta = await fetch("../JSON/procesadores.json");
+    const jsonURL = `../JSON/${categoria}.json`;
+    const respuesta = await fetch(jsonURL);
     const data = await respuesta.json();
+
+    const productos = data[categoria];
   
-    contenidoCards = data.procesadores.map(prod => new Producto(
+    contenidoCards = productos.map(prod => new Producto(
       prod.id,
       prod.imgSrc,
       prod.titulo,
@@ -21,7 +28,8 @@ const cargarProductos = async() => {
       prod.descripcion,
       prod.link,
       prod.cantidad,
-      prod.disponible
+      prod.disponible,
+      categoria
     ));
   }catch(error){
     console.log(error);
