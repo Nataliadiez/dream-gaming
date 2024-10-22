@@ -150,26 +150,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsDark)
+    if(contenedorBtnSection){
+        contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsDark)
+    }
 });
 
 
+const contenedorImgLogo = document.querySelector("#img-logo");
 
 function actualizarEstadoTema(){
+
+
     //CAMBIO EN BOTONES
-    contenedorBtnSection.innerHTML = '';
+    if(contenedorBtnSection)
+    {
+        contenedorBtnSection.innerHTML = '';
+    }
 
     //CAMBIO EN FONDO
     let linkEstiloTema = document.querySelector("#linkthemeStyle");
 
     if(miprueba.checked){
-        contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsLight);
-        linkEstiloTema.setAttribute("href", "style/modoClaro.css")
+        if(contenedorBtnSection)
+        {
+            contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsLight);
+        }
+        linkEstiloTema.setAttribute("href", "style/modoClaro.css");
+        contenedorImgLogo.setAttribute("src", "img/Blue_Illustration_Game_Presentation_1.png")
 
     }
     else{
-        contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsDark);
-        linkEstiloTema.setAttribute("href", "style/modoOscuro..css")
+        if(contenedorBtnSection)
+        {
+            contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsDark);
+        }
+
+        linkEstiloTema.setAttribute("href", "style/modoOscuro.css")
+        contenedorImgLogo.setAttribute("src", "img/Blue Illustration Game Presentation-Photoroom.png")
     }
 
 

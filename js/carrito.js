@@ -35,7 +35,7 @@ const cargarCarrito = () => {
         <div class="unidadCompra">
             <img class="imgProducto" src="${producto.img}" alt="">
             <div class="div-col">
-                <h5>${producto.titulo}</h5>
+                <h5 id="tituloProducto">${producto.titulo}</h5>
             </div>
 
             <div class="div-flex contenedorCantidad">
@@ -51,7 +51,7 @@ const cargarCarrito = () => {
             </div>
 
             <div class="div-flex div-precio">
-                <p>Precio: $${producto.precio * producto.cantidadElegida}</p>
+                <p id="precio">Precio: $${producto.precio * producto.cantidadElegida}</p>
             </div>
         </div>
         `;

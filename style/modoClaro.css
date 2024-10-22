@@ -1,5 +1,5 @@
 #navBar{
-    background-color: #EBDCF4;
+    background-color: #95dbe6;
 }
 
 #navbarSupportedContent a{
@@ -46,4 +46,17 @@ h1{
 .btn-sections {
     border-radius: 10px !important;
     border: 2px solid black;
+}
+/* modo claro carrito compras */
+#tituloProducto{
+    color: black !important;
+}
+
+.unidadCompra {
+    border: solid 1px black !important;
+    background-color: #e1c8eb;
+}
+
+#precio{
+    color: black;
 }

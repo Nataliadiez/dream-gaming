@@ -119,3 +119,7 @@ input[type=number]::-webkit-outer-spin-button {
         width: 30%;
     }
 }
+ /* !!!ALTERNATIVO PARA FIREFOX */
+/* input[type="number"] {
+    -moz-appearance: textfield;
+} */
