@@ -1,5 +1,5 @@
 #navBar{
-    background-color: wheat;
+    background-color: #EBDCF4;
 }
 
 #navbarSupportedContent a{
@@ -11,7 +11,7 @@
 }
 
 body{
-    background-color: wheat;
+    background-color: #EBDCF4;
 }
 
 .card-body{
@@ -35,6 +35,15 @@ body{
     border: none !important;
 }
 
+#loginButton:hover{
+    color: white !important;
+}
+
 h1{
     color: black;
+}
+
+.btn-sections {
+    border-radius: 10px !important;
+    border: 2px solid black;
 }

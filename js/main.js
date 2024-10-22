@@ -33,6 +33,8 @@ const navHTML = `
                         <a class="nav-link" href="./memorias.html">Memorias RAM</a>
                     </li>
                 </ul>
+
+                <input id="prueba" type="checkbox">
                 <button id="btn-modo" class="btn"><i class="bi bi-brightness-high"></i></button>
                 <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
                 <a href="/carrito.html"><i class="bi bi-cart2"></i></a>
@@ -47,6 +49,21 @@ const navHTML = `
     </nav>
 `;
 
+//verificar estado null en la siguientes paginas
+const contenedorBtnSection = document.querySelector("#img-productos");
+
+const btnSectionsDark = `
+    <a href="./memorias.html"><img class="btn-sections" src="./img/Memorias ram.png" alt=""></a>
+    <a href="./placas.html"><img class="btn-sections" src="./img/PLACAS.png" alt=""></a>
+    <a href="./procesadores.html"><img class="btn-sections" src="./img/PROCESADORES.png" alt=""></a>`;
+
+const btnSectionsLight = `
+    <a href="./memorias.html"><img class="btn-sections" src="img/MEMORIAS-CLARO.png" alt=""></a>
+    <a href="./placas.html"><img class="btn-sections" src="img/PLACAS-CLARO.png" alt=""></a>
+    <a href="./procesadores.html"><img class="btn-sections" src="img/PROCESADORES-CLARO.png" alt=""></a>`;
+
+
+
 const linksCDN = `
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link
@@ -57,9 +74,8 @@ const linksCDN = `
     />
     <link rel="icon" type="image/png" href="./img/favicon.png">
     <link rel="stylesheet" href="./style/style.css"/>
+    <link id="linkthemeStyle" rel="stylesheet" href="./style/modoOscuro.css"/> 
     `
-    //corté el modo claro para ver los colores del oscuro
-    //<link rel="stylesheet" href="./style/modoClaro.css"/> 
 
 const contenedorFooter = document.querySelector("footer");
 const footer = `
@@ -75,64 +91,93 @@ const footer = `
     </div>`
 
 // INSERCIÓN DINÁMICA DE TODOS LOS COMPONENTES
-    contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
-    document.head.insertAdjacentHTML("afterbegin", linksCDN);
-    contenedorFooter.insertAdjacentHTML("afterbegin", footer);
+contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
+document.head.insertAdjacentHTML("afterbegin", linksCDN);
+contenedorFooter.insertAdjacentHTML("afterbegin", footer);
 
-    const modalRegistroNombre = `
-        <div class="modal fade" id="nameRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">¡Bienvenido!</h1>
-                    </div>
-                    <div class="modal-body">
-                        <p>Ingrese su nombre para ver nuestros productos 💻</p>
-                        <form id="nameForm">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="name" required>
-                                <div id="textHelp" class="form-text">Este campo no puede estar vacío</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </form>
-                    </div>
+const modalRegistroNombre = `
+    <div class="modal fade" id="nameRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">¡Bienvenido!</h1>
+                </div>
+                <div class="modal-body">
+                    <p>Ingrese su nombre para ver nuestros productos 💻</p>
+                    <form id="nameForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div id="textHelp" class="form-text">Este campo no puede estar vacío</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
                 </div>
             </div>
-        </div>`
+        </div>
+    </div>`
 
-    document.addEventListener('DOMContentLoaded', () => {
-        document.body.insertAdjacentHTML("afterbegin", modalRegistroNombre);
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.insertAdjacentHTML("afterbegin", modalRegistroNombre);
 
-        const name = localStorage.getItem('userName');
-        //inicializo un modal con Bootstrap
-        const modal = new bootstrap.Modal(document.getElementById('nameRegisterModal'));
+    const name = localStorage.getItem('userName');
+    //inicializo un modal con Bootstrap
+    const modal = new bootstrap.Modal(document.getElementById('nameRegisterModal'));
+
+    //si el nombre no esta guardado en el localStorage, muestro el modal
+    if (!name) {
+        modal.show();
+    }
+
+    document.getElementById('nameForm').addEventListener('submit', (event) => {
+        //evita que se recargue la página cuando se envía el form
+        event.preventDefault();
+        const userName = document.getElementById('name').value;
     
-        //si el nombre no esta guardado en el localStorage, muestro el modal
-        if (!name) {
-            modal.show();
+        //si no esta vacío el input, lo guarda en localStorage
+        if (userName) {
+            localStorage.setItem('userName', userName);
+            modal.hide();//oculto el modal
         }
+    });
     
-        document.getElementById('nameForm').addEventListener('submit', (event) => {
-            //evita que se recargue la página cuando se envía el form
-            event.preventDefault();
-            const userName = document.getElementById('name').value;
-        
-            //si no esta vacío el input, lo guarda en localStorage
-            if (userName) {
-                localStorage.setItem('userName', userName);
-                modal.hide();//oculto el modal
+    document.querySelectorAll('a.nav-link, #img-productos a').forEach(link => {
+        link.addEventListener('click', (event) => {
+            if (!localStorage.getItem('userName')) {
+                event.preventDefault();
+                modal.show();
             }
         });
-        
-        document.querySelectorAll('a.nav-link, #img-productos a').forEach(link => {
-            link.addEventListener('click', (event) => {
-                if (!localStorage.getItem('userName')) {
-                    event.preventDefault();
-                    modal.show();
-                }
-            });
-        });
     });
+
+    contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsDark)
+});
+
+
+
+function actualizarEstadoTema(){
+    //CAMBIO EN BOTONES
+    contenedorBtnSection.innerHTML = '';
+
+    //CAMBIO EN FONDO
+    let linkEstiloTema = document.querySelector("#linkthemeStyle");
+
+    if(miprueba.checked){
+        contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsLight);
+        linkEstiloTema.setAttribute("href", "style/modoClaro.css")
+
+    }
+    else{
+        contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsDark);
+        linkEstiloTema.setAttribute("href", "style/modoOscuro..css")
+    }
+
+
+
+}
+
+const miprueba = document.querySelector("#prueba");
+miprueba.addEventListener('click', actualizarEstadoTema);
+
 
     

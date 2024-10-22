@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(11, 12, 46);
+}
+
+
+#navBar{
+    background-color: #481A5C;
+}
+
+
+
+#navbarSupportedContent a{
+    color: white !important;
+}
+
+
+.bi-brightness-high{
+    color: white;
+}
+
+
+.card-body{
+    color: white;
+}
+
+.btn-sections {
+    border-radius: 10px !important;
+    border: 2px solid white;
+}
