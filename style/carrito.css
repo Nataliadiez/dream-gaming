@@ -4,69 +4,118 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
-#contenedor-carrito{
+.unidadCompra {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    align-items: center;
-}
-
-.unidadCompra{
-    display: flex;
-    border: solid 1px #ffbef3;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 20px;
-    gap: 50px;
+    gap: 20px;
+    border: solid 1px #ffbef3;
     border-radius: 10px;
     margin: 10px;
+    text-align: left;
 }
 
-.imgProducto{
+.imgProducto {
     width: 10%;
+    flex-shrink: 0;
 }
 
-.div-flex{
+.div-col {
+    flex: 1;
+}
+
+.contenedorCantidad,
+.div-flex {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-#divCant{
-    gap: 50px;
-}
-
-.inputCantidad{
+.inputCantidad {
     width: 50px;
     background-color: #481a5c81;
     color: white;
     text-align: center;
     border: none;
-    margin: 0 5px;
+    height: 35px;
 }
 
-.contenedorCantidad{
-    display: flex;
-    align-items: center;
+#incremento, #decremento {
+    background-color: #B73EAC;
+    border: none;
+    width: 35px;
 }
 
-.bi-trash{
-    color: rgb(236, 121, 121);
-    cursor: pointer;
+#decremento {
+    border-radius: 10px 0 0 10px;
 }
 
-#btn-borrar-item{
+#incremento {
+    border-radius: 0 10px 10px 0;
+}
+
+#btn-borrar-item {
     background-color: transparent;
     border: none;
+    cursor: pointer;
+}
+.btn-comprar{
+    display: block;
+    width: 20%;
+    margin: auto;
+    background-color: #C900AE;
+    border: none;
+}
+.btn-comprar-oculto{
+    display: none;
+}
+.btn-comprar:hover{
+    background-color: #4e0058;
+}
+.bi-trash {
+    color: rgb(236, 121, 121);
+}
+.div-precio{
+    margin-top: 20px;
 }
 
-/* Para Chrome, Safari, Edge y Opera */
-#cantidadProducto::-webkit-outer-spin-button,
-#cantidadProducto::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
+/* MODAL ELIMINAR PRODUCTO */
 .modal-content{
-    color: rgb(243, 203, 255);   
-    background-color: #381447;
+    background: linear-gradient(#3c164d, rgb(49, 6, 40));
+    color: #ffeafb;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 992px) {
+    .unidadCompra {
+        display: block;
+        text-align: center;
+    }
+
+    .imgProducto {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        width: 20%;
+    }
+
+    .contenedorCantidad,
+    .div-flex {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .div-col {
+        margin-bottom: 10px;
+    }
+    .div-precio{
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 770px) {
+    .imgProducto {
+        width: 30%;
+    }
 }

@@ -7,6 +7,7 @@ const params = new URLSearchParams(window.location.search);
 const productoId = params.get('id'); //1, 2, 3, etc.
 const contenedorDetalleProducto = document.querySelector("#contenedor-producto");
 const categoria = params.get('categoria'); //procesadores, placas, memorias
+const contenedorModal = document.querySelector('#modalAgregadoCarrito');
 let cantidadMaxima;
 
 
@@ -98,7 +99,6 @@ const agregarAlCarrito = (producto) => {
         precio: producto.precio,
         cantidadElegida: cantidad,
         stockDisponible: producto.cantidad,
-        descripcion: producto.descripcion,
         img: producto.imgSrc,
     };
 
@@ -106,15 +106,25 @@ const agregarAlCarrito = (producto) => {
 
     const productoExistente = carrito.find(item => item.id === productoCarrito.id);
     if (productoExistente) {
-        productoExistente.cantidad += cantidad;
+        const nuevaCantidad = productoExistente.cantidadElegida + cantidad;
+
+
+        if (nuevaCantidad > productoCarrito.stockDisponible) {
+            alert(`Solo hay ${productoCarrito.stockDisponible} unidades disponibles.`);
+            return;
+        }
+        
+        productoExistente.cantidadElegida = nuevaCantidad;
     } else {
         carrito.push(productoCarrito);
     }
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
-    alert(`El producto ${producto.titulo} fue agregado exitosamente al carrito.`);
+    const modalAgregadoCarrito = new bootstrap.Modal(contenedorModal);
+    modalAgregadoCarrito.show();
 };
+
 
 document.addEventListener("DOMContentLoaded", cargarProductoDetalle);
 

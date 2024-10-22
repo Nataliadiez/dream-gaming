@@ -1,4 +1,6 @@
 const contenedorCarrito = document.querySelector("#contenedor-carrito");
+const btnComprar = document.querySelector(".btn-comprar");
+const stockSpan = document.querySelector("#stockDisponible");
 
 let productoAEliminar; // Variable para almacenar el producto a eliminar
 
@@ -20,7 +22,12 @@ const cargarCarrito = () => {
 
     if (carrito.length === 0) {
         contenedorCarrito.innerHTML = "<p>No hay productos en el carrito.</p>";
+        btnComprar.classList.add("btn-comprar-oculto");
+        btnComprar.classList.remove("btn-comprar");
         return;
+    }else{
+        btnComprar.classList.add("btn-comprar");
+        btnComprar.classList.remove("btn-comprar-oculto");
     }
 
     carrito.forEach(producto => {
@@ -29,13 +36,12 @@ const cargarCarrito = () => {
             <img class="imgProducto" src="${producto.img}" alt="">
             <div class="div-col">
                 <h5>${producto.titulo}</h5>
-                <p>Descripción: ${producto.descripcion}</p>
             </div>
 
             <div class="div-flex contenedorCantidad">
-                <button class="btn btn-primary" onclick="cambiarCantidad(${producto.id}, -1)">-</button>
+                <button class="btn btn-primary" id="decremento" onclick="cambiarCantidad(${producto.id}, -1)">-</button>
                 <input type="number" class="inputCantidad" value="${producto.cantidadElegida}" onchange="actualizarCantidad(${producto.id}, this.value)">
-                <button class="btn btn-primary" onclick="cambiarCantidad(${producto.id}, 1)">+</button>
+                <button class="btn btn-primary" id="incremento" onclick="cambiarCantidad(${producto.id}, 1)">+</button>
             </div>
 
             <div class="div-flex">
@@ -44,7 +50,7 @@ const cargarCarrito = () => {
                 </button>
             </div>
 
-            <div class="div-flex">
+            <div class="div-flex div-precio">
                 <p>Precio: $${producto.precio * producto.cantidadElegida}</p>
             </div>
         </div>
@@ -62,7 +68,9 @@ const cambiarCantidad = (idProducto, monto) => {
 
         // Verifica que no exceda la cantidad disponible
         if (nuevaCantidad > producto.stockDisponible) {
-            alert(`Solo hay ${producto.stockDisponible} unidades disponibles.`);
+            stockSpan.textContent = producto.stockDisponible;
+            const modalStock = new bootstrap.Modal(document.getElementById("modalStock"));
+            modalStock.show();
             return;
         }
 

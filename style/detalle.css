@@ -1,9 +1,8 @@
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
-
 
 .contenido-producto{
     width: 80%;
@@ -45,7 +44,6 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: justify;
 }
 
-
 .div-flex{
     display: flex;
 }
@@ -60,7 +58,22 @@ input[type=number]::-webkit-outer-spin-button {
     color: white;
     text-align: center;
     border: none;
-    margin: 0 5px;
+    height: 35px;
+}
+#incremento, #decremento{
+    background-color: #B73EAC;
+    border: none;
+    border-radius: 0;
+    width: 35px;
+}
+#decremento{
+    border-radius: 0;
+    border-radius:10px 0 0 10px;
+    
+}
+#incremento{
+    border-radius: 0;
+    border-radius:0 10px 10px 0;
 }
 
 .contenedorCantidad{
@@ -68,6 +81,26 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
 }
 
+.modal-content{
+    background: linear-gradient(#3c164d, rgb(49, 6, 40));
+    color: #ffeafb;
+}
+#btn-ir-carrito{
+    border: solid 2px #d4479e;
+    color: #d4479e;
+}
+#btn-ir-carrito:hover{
+    background-color:#d4479e;
+    color: black;
+}
+#btn-cerrar{
+    border: solid 2px #f5ccff;
+    color: #f5ccff;
+}
+#btn-cerrar:hover{
+    background-color: #f5ccff;
+    color: black;
+}
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
     .contenido-reducido .col-md-4,
@@ -80,5 +113,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
     .card-body{
         margin-top: 0;
+    }
+    .div-flex{
+        display: flex;
+        justify-content: center;
     }
 }

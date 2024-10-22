@@ -1,0 +1,43 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Estilos para el ticket */
+.ticket-container {
+    background-color: white;
+    color: #303030;
+}
+
+.ticket-header p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.ticket-totals p {
+    font-size: 1rem;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.ticket-footer p {
+    font-size: 0.85rem;
+    color: #777;
+}
+.div-btn{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0;
+    gap: 10px;
+}
+
+.div-btn button{
+    background-color: #E03E88;
+    border: none;
+}
+.div-btn button:hover{
+    background-color: #e279a9;
+}

@@ -13,8 +13,8 @@
     <h1>Carrito de compras</h1>
     <div class="container" id="contenedor-carrito">
 
-    </div>
-    <button class="btn btn-primary">Comprar</button>
+    </div class="div-btn-comprar">
+    <button class="btn btn-primary btn-comprar">Comprar</button>
     </div>
 
     <!-- Modal para confirmar la eliminación del item del carrito -->
@@ -23,20 +23,41 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalEliminarLabel">Eliminar Producto</h5>
-                    <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     ¿Estás seguro de que deseas eliminar el producto <span id="nombreProducto"></span> del carrito?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-danger" id="confirmarEliminar">Sí, eliminar</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-outline-danger" id="confirmarEliminar">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para avisar que se alcanzó el máximo disponible de stock -->
+    <div class="modal fade" id="modalStock" tabindex="-1" aria-labelledby="modalStockLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalStockLabel">Stock máximo alcanzado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    Lo sentimos, no puedes agregar más unidades de este producto. Solo hay <span
+                        id="stockDisponible"></span> unidades disponibles.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <!-- Modal para preguntar si desea verificar la compra -->
 
 
     <footer></footer>
