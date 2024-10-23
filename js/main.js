@@ -34,7 +34,7 @@ const navHTML = `
                     </li>
                 </ul>
 
-                <input id="prueba" type="checkbox">
+                <input id="prueba" type="checkbox" style="display: none">
                 <button id="btn-modo" class="btn"><i class="bi bi-brightness-high"></i></button>
                 <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
                 <a href="/carrito.html"><i class="bi bi-cart2"></i></a>
@@ -170,7 +170,8 @@ function actualizarEstadoTema(){
     //CAMBIO EN FONDO
     let linkEstiloTema = document.querySelector("#linkthemeStyle");
 
-    if(miprueba.checked){
+    if(!miprueba.checked){
+        miprueba.checked = true;
         if(contenedorBtnSection)
         {
             contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsLight);
@@ -180,6 +181,7 @@ function actualizarEstadoTema(){
 
     }
     else{
+        miprueba.checked = false;
         if(contenedorBtnSection)
         {
             contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsDark);
@@ -194,7 +196,9 @@ function actualizarEstadoTema(){
 }
 
 const miprueba = document.querySelector("#prueba");
-miprueba.addEventListener('click', actualizarEstadoTema);
+const btnCambioTema = document.querySelector("#btn-modo");
+
+btnCambioTema.addEventListener('click', actualizarEstadoTema);
 
 
     
