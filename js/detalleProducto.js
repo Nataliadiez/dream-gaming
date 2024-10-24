@@ -4,13 +4,13 @@
 //windows.location.search es la barra de búsqueda
 // .get es un método de los parámetros para obtener el valor de la clave entre paréntesis
 const params = new URLSearchParams(window.location.search);
-const productoId = params.get('id'); //1, 2, 3, etc.
+const productoId = params.get("id"); //1, 2, 3, etc.
+const categoria = params.get("categoria"); //procesadores, placas, memorias
 const contenedorDetalleProducto = document.querySelector("#contenedor-producto");
-const categoria = params.get('categoria'); //procesadores, placas, memorias
 const contenedorModal = document.querySelector('#modalAgregadoCarrito');
 let cantidadMaxima;
 
-
+console.log(categoria)
 const obtenerJsonSegunCategoria = () => {
     let jsonArchivo = "";
     if (categoria === "procesadores") {

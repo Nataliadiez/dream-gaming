@@ -1,16 +1,17 @@
 const contenedorCarrito = document.querySelector("#contenedor-carrito");
-const btnComprar = document.querySelector(".btn-comprar");
+const btnComprar = document.querySelector("#btn-comprar");
 const stockSpan = document.querySelector("#stockDisponible");
+const btnEliminar = document.querySelector("#confirmarEliminar");
+const btnConfirmarCompra = document.querySelector("#confirmarComprar");
 
-let productoAEliminar; // Variable para almacenar el producto a eliminar
+let productoAEliminar;
 
-// Añadir evento para el botón de confirmar en el modal
-document.getElementById("confirmarEliminar").addEventListener("click", () => {
+btnEliminar.addEventListener("click", () => {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     carrito = carrito.filter(item => item.id !== productoAEliminar);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     cargarCarrito();
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalEliminar'));
+    const modal = bootstrap.Modal.getInstance(document.querySelector('#modalEliminar'));
     modal.hide();
 });
 
@@ -69,7 +70,7 @@ const cambiarCantidad = (idProducto, monto) => {
         // Verifica que no exceda la cantidad disponible
         if (nuevaCantidad > producto.stockDisponible) {
             stockSpan.textContent = producto.stockDisponible;
-            const modalStock = new bootstrap.Modal(document.getElementById("modalStock"));
+            const modalStock = new bootstrap.Modal(document.querySelector("#modalStock"));
             modalStock.show();
             return;
         }
@@ -112,8 +113,18 @@ const eliminarDelCarrito = (idProducto) => {
     const nombreProducto = document.querySelector("#nombreProducto");
     nombreProducto.textContent = producto.titulo;
 
-    const modal = new bootstrap.Modal(document.getElementById('modalEliminar'));
+    const modal = new bootstrap.Modal(document.querySelector('#modalEliminar'));
     modal.show();
 };
 
+const comprarCarrito = () => {
+    const modalConfirmarCompra = new bootstrap.Modal(document.querySelector("#modalComprar"))
+    modalConfirmarCompra.show();
+    btnConfirmarCompra.addEventListener("click", ()=> {
+    window.location.href = "ticketCompra.html";
+    })
+}
+
+
 document.addEventListener("DOMContentLoaded", cargarCarrito);
+btnComprar.addEventListener("click", comprarCarrito)

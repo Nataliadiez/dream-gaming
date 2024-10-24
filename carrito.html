@@ -14,7 +14,7 @@
     <div class="container" id="contenedor-carrito">
 
     </div class="div-btn-comprar">
-    <button class="btn btn-primary btn-comprar">Comprar</button>
+    <button id="btn-comprar" class="btn btn-primary btn-comprar">Comprar</button>
     </div>
 
     <!-- Modal para confirmar la eliminación del item del carrito -->
@@ -58,7 +58,24 @@
 
 
     <!-- Modal para preguntar si desea verificar la compra -->
-
+    <div class="modal fade" id="modalComprar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEliminarLabel">Confirmar compra</h5>
+                    <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Desea confirmar la compra de los productos del carrito?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-outline-primary" id="confirmarComprar">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer></footer>
 

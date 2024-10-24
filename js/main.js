@@ -22,22 +22,22 @@ const navHTML = `
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./procesadores.html">Procesadores</a>
+                        <a class="nav-link" href="./productos.html?categoria=procesadores">Procesadores</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./placas.html">Placas de video</a>
+                        <a class="nav-link" href="./productos.html?categoria=placas">Placas de video</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./memorias.html">Memorias RAM</a>
+                        <a class="nav-link" href="./productos.html?categoria=memorias">Memorias RAM</a>
                     </li>
                 </ul>
 
                 <input id="prueba" type="checkbox" style="display: none">
                 <button id="btn-modo" class="btn"><i class="bi bi-brightness-high"></i></button>
                 <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
-                <a href="/carrito.html"><i class="bi bi-cart2"></i></a>
+                <a id="link-carrito" href="/carrito.html"><i class="bi bi-cart2"></i></a>
 
                 <!--barra de busqueda comentada por el momento-->
                 <!-- <form class="d-flex" role="search">
@@ -120,30 +120,26 @@ const modalRegistroNombre = `
 document.addEventListener('DOMContentLoaded', () => {
     document.body.insertAdjacentHTML("afterbegin", modalRegistroNombre);
 
-    const name = localStorage.getItem('userName');
-    //inicializo un modal con Bootstrap
-    const modal = new bootstrap.Modal(document.getElementById('nameRegisterModal'));
+    const name = localStorage.getItem('nombreUsuario');
+    const modal = new bootstrap.Modal(document.querySelector("#nameRegisterModal"));
 
-    //si el nombre no esta guardado en el localStorage, muestro el modal
     if (!name) {
         modal.show();
     }
-
-    document.getElementById('nameForm').addEventListener('submit', (event) => {
-        //evita que se recargue la página cuando se envía el form
+    const formNombre = document.querySelector("#nameForm");
+    formNombre.addEventListener("submit", (event) => {
         event.preventDefault();
-        const userName = document.getElementById('name').value;
+        const userName = document.querySelector("#name").value;
     
-        //si no esta vacío el input, lo guarda en localStorage
         if (userName) {
-            localStorage.setItem('userName', userName);
-            modal.hide();//oculto el modal
+            localStorage.setItem('nombreUsuario', userName);
+            modal.hide();
         }
     });
     
-    document.querySelectorAll('a.nav-link, #img-productos a').forEach(link => {
+    document.querySelectorAll('a.nav-link, #img-productos a, #link-carrito, #loginButton').forEach(link => {
         link.addEventListener('click', (event) => {
-            if (!localStorage.getItem('userName')) {
+            if (!name) {
                 event.preventDefault();
                 modal.show();
             }
@@ -191,8 +187,6 @@ function actualizarEstadoTema(){
         contenedorImgLogo.setAttribute("src", "img/Blue Illustration Game Presentation-Photoroom.png")
     }
 
-
-
 }
 
 const miprueba = document.querySelector("#prueba");
@@ -200,5 +194,3 @@ const btnCambioTema = document.querySelector("#btn-modo");
 
 btnCambioTema.addEventListener('click', actualizarEstadoTema);
 
-
-    

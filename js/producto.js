@@ -4,7 +4,6 @@ export default class Producto {
     titulo;
     precio;
     descripcion;
-    link;
     cantidad;
     disponible;
     categoria;
@@ -15,7 +14,6 @@ export default class Producto {
         titulo,
         precio,
         descripcion,
-        link,
         cantidad,
         disponible,
         categoria
@@ -25,7 +23,6 @@ export default class Producto {
         this.titulo = titulo;
         this.precio = precio;
         this.descripcion = descripcion;
-        this.link = link;
         this.cantidad = cantidad;
         this.disponible = disponible;
         this.categoria = categoria;
@@ -47,4 +44,5 @@ export default class Producto {
         cardElement.insertAdjacentHTML("beforeend", contenido);
         return cardElement;
     }
+    
 }
