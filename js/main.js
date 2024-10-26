@@ -53,16 +53,14 @@ const navHTML = `
 const contenedorBtnSection = document.querySelector("#img-productos");
 
 const btnSectionsDark = `
-    <a href="./memorias.html"><img class="btn-sections" src="./img/Memorias ram.png" alt=""></a>
-    <a href="./placas.html"><img class="btn-sections" src="./img/PLACAS.png" alt=""></a>
-    <a href="./procesadores.html"><img class="btn-sections" src="./img/PROCESADORES.png" alt=""></a>`;
+    <a href="./productos.html?categoria=memorias"><img class="btn-sections" src="./img/Memorias ram.png" alt=""></a>
+    <a href="./productos.html?categoria=placas"><img class="btn-sections" src="./img/PLACAS.png" alt=""></a>
+    <a href="./productos.html?categoria=procesadores"><img class="btn-sections" src="./img/PROCESADORES.png" alt=""></a>`;
 
 const btnSectionsLight = `
-    <a href="./memorias.html"><img class="btn-sections" src="img/MEMORIAS-CLARO.png" alt=""></a>
-    <a href="./placas.html"><img class="btn-sections" src="img/PLACAS-CLARO.png" alt=""></a>
-    <a href="./procesadores.html"><img class="btn-sections" src="img/PROCESADORES-CLARO.png" alt=""></a>`;
-
-
+    <a href="./productos.html?categoria=memorias"><img class="btn-sections" src="img/MEMORIAS-CLARO.png" alt=""></a>
+    <a href="./productos.html?categoria=placas"><img class="btn-sections" src="img/PLACAS-CLARO.png" alt=""></a>
+    <a href="./productos.html?categoria=procesadores"><img class="btn-sections" src="img/PROCESADORES-CLARO.png" alt=""></a>`;
 
 const linksCDN = `
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
