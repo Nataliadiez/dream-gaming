@@ -62,6 +62,8 @@ const btnSectionsLight = `
     <a href="./productos.html?categoria=placas"><img class="btn-sections" src="img/PLACAS-CLARO.png" alt=""></a>
     <a href="./productos.html?categoria=procesadores"><img class="btn-sections" src="img/PROCESADORES-CLARO.png" alt=""></a>`;
 
+
+
 const linksCDN = `
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link

@@ -1,4 +1,6 @@
+
 const contenedorTicket = document.querySelector("#contenedorTicket");
+const { jsPDF } = window.jspdf;
 
 const traerContenidoCarrito = () => {
     const carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -47,14 +49,33 @@ const pintarTicket = () => {
             </div>
 
             <div id="contenedor-botones">
-                <button class="btn btn-primary">Comprar nuevamente</button>
-                <button class="btn btn-primary">Imprimir ticket</button>
+                <button class="btn btn-primary" id="comprarDeNuevo">Comprar nuevamente</button>
+                <button class="btn btn-primary" id="imprimirTicket">Imprimir ticket</button>
             </div>
         </div>
-
     `
     contenedorTicket.insertAdjacentHTML("beforeend", contenidoTicket);
-    
+    const btnImprimirTicket = document.querySelector("#imprimirTicket");
+    const btnNuevaCompra = document.querySelector("#comprarDeNuevo")
+    btnImprimirTicket.addEventListener("click", imprimirTicket)
+    btnNuevaCompra.addEventListener("click", comprarNuevamente);
 }
+
+const imprimirTicket = () => {
+    html2canvas(contenedorTicket)
+    .then(canvas => {
+        //convierte el canva en una imagen
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "pt", "a4");
+        pdf.addImage(imgData, 'PNG', 0, 0);
+        pdf.save("ticketDeCompra.pdf");
+    });
+}
+const comprarNuevamente = () => {
+    localStorage.clear();
+    alert("Se borró correctamente!");
+    window.location.href = "index.html"
+}
+
 
 document.addEventListener("DOMContentLoaded", pintarTicket);

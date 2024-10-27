@@ -3,7 +3,9 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none; 
     margin: 0; 
 }
-
+h1, #contenedor-carrito{
+    text-align: center;
+}
 .unidadCompra {
     display: flex;
     justify-content: space-between;

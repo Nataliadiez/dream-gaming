@@ -46,7 +46,6 @@ const renderizarCards = () => {
   cardAmostrar.forEach(p => {
     cardsContainer.appendChild(p.mostrarCards());
   })
-
 }
 
 const cambiarPagina = () => {
