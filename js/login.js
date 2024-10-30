@@ -26,6 +26,7 @@ const accederRapido = () => {
     const usuarioPredeterminado = Usuario.obtenerUsuarios()[0];
     email.value = usuarioPredeterminado.email;
     password.value = usuarioPredeterminado.password;
+    login(email.value, password.value);
 }
 
 document.getElementById("login").addEventListener("click", validacionInputs);

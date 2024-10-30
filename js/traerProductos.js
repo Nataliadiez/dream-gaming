@@ -44,8 +44,17 @@ const renderizarCards = () => {
   const cardAmostrar = contenidoCards.slice(start, end)
   
   cardAmostrar.forEach(p => {
-    cardsContainer.appendChild(p.mostrarCards());
+    cardsContainer.appendChild(p.mostrarCards(eliminarCards));
   })
+}
+
+const eliminarCards = (producto) => {
+  const indiceAeliminar = contenidoCards.findIndex(prod => prod.id == producto.id)
+  if(indiceAeliminar !== -1){
+    contenidoCards.splice(indiceAeliminar, 1);
+    alert(`Producto: ${indiceAeliminar} eliminado.`)
+    renderizarCards();
+  }
 }
 
 const cambiarPagina = () => {

@@ -95,7 +95,38 @@
     background-color: #F0B4FF;
     color: #36124b62;
 }
-
+/*ESTILOS ADMIN*/
+#contenedor-edit{
+    position: relative;
+}
+.bi-pencil{
+    color: pink;
+    font-size: 18px;
+}
+.bi-trash{
+    color: red;
+    display: flex;
+    align-items: end;
+    font-size: 25px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 5px;
+}
+.bi.bi-pencil::before{
+    margin-bottom: 25px;
+}
+span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.edit{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 /* MEDIA QUERIES */
 @media (max-width: 575px) {
     #cards-container .card-wrapper {

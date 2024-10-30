@@ -117,7 +117,7 @@ const modalRegistroNombre = `
         </div>
     </div>`
 
-document.addEventListener('DOMContentLoaded', () => {
+const preguntarNombre = () => {
     document.body.insertAdjacentHTML("afterbegin", modalRegistroNombre);
 
     const name = localStorage.getItem('nombreUsuario');
@@ -149,6 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if(contenedorBtnSection){
         contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsDark)
     }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    preguntarNombre();
 });
 
 
@@ -191,6 +195,7 @@ function actualizarEstadoTema(){
 
 const miprueba = document.querySelector("#prueba");
 const btnCambioTema = document.querySelector("#btn-modo");
+const contenedorCards = document.querySelector("#cards-container");
 
 btnCambioTema.addEventListener('click', actualizarEstadoTema);
 
