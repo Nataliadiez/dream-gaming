@@ -1,14 +1,11 @@
-const { DataTYpes, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../db/sequelizeConnection.js");
 
 const ProductoSequelize = sequelize.define("Producto", {
     id:{
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
-    },
-    img:{
-
+        primaryKey: true,
     },
     titulo: {
         type: DataTypes.STRING,
@@ -16,15 +13,15 @@ const ProductoSequelize = sequelize.define("Producto", {
     },
     precio: {
         type: DataTypes.FLOAT,
-        allowNull: false
+        allowNull: false,
+    },
+    img:{
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     descripcion:{
         type: DataTypes.TEXT,
         allowNull: true,
-    },
-    cantidad:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
     },
     disponible:{
         type: DataTypes.BOOLEAN,

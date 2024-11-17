@@ -19,11 +19,12 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //rutas
-app.use("/", router);
 
 app.get("/", (req, res)=> {
-    res.send("Api de Dream-gaming e-commerce 2024");
+    res.send("pagina principal");
 })
+
+app.use("/", router);
 
 const puerto = process.env.PORT;
 app.listen(puerto, () => {
