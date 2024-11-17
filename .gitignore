@@ -1,5 +1,7 @@
 # Node modules
 /node_modules/
+/server/node_modules/
+node_modules/
 
 # Archivos de entorno
 .env

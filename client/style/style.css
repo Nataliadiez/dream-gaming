@@ -1,0 +1,160 @@
+/* FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: rgb(11, 12, 46);
+    color: white ;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+/* NAVBAR  */
+#img-logo{
+    width: 350px;
+    margin-right: 30px;
+}
+#navBar{
+    background-color: #481A5C;
+}
+
+#navbarSupportedContent .nav-link:hover {
+    color: rgb(201, 0, 174) !important;
+}
+
+
+#togglerBar{
+    color: #f8a5c8 !important;
+    font-size: 1.8rem !important;
+    border: none;
+}
+
+#navbarSupportedContent a{
+    color: white !important;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+#buscarBtn{
+    background: #774c8a;
+    box-shadow: 0px 0px 5px rgb(26, 26, 26);
+    color: white;
+    border: none
+}
+
+#buscarBtn:hover{
+    background: rgb(201, 0, 174);
+}
+
+#loginButton{
+    color: #e295c5;
+    border: solid 1px #e295c5;
+    margin-right: 10px;
+}
+
+#loginButton:hover{
+    background-color: rgb(201, 0, 174);
+    color: white;
+    border: solid 1px rgb(201, 0, 174);
+}
+
+.bi-brightness-high{
+    color: white;
+}
+
+
+/* FOOTER */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 90px;
+    text-align: center;
+    margin-top: auto;
+    box-sizing: border-box;
+    background: url("../img/footerimg.png") no-repeat center center;
+    background-size: cover;
+    margin-top: auto;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 50px;
+}
+
+.copyright {
+    margin-right: auto;
+}
+
+.bi{
+    font-size: 1.5rem;
+}
+
+.bi:hover{
+    color: #E8428A;
+}
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width:1240px) {
+    #img-logo{
+        width: 15rem;
+        margin-right: 0px;
+    }
+}
+@media screen and (max-width:1199px){
+    #navBar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+    #navBar li{
+    border-bottom: solid 2px #351344;
+    margin: 0;
+    padding: 0;
+    }
+    #loginButton{
+        margin: 20px 0px;
+        width: 100%;
+    }
+    #buscarBtn{
+        width: 40%;
+    }
+}
+@media screen and (max-width:1000px) {
+    footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .copyright {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}

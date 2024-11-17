@@ -1,82 +1,13 @@
+const cargarProductos = async () => {
+  try {
+      const url = "http://localhost:3000/productos";
+      const respuesta = await fetch(url);
+      const html = await respuesta.text();
 
-import Producto from "./producto.js";
-
-const botonPrev = document.querySelector("#anterior");
-const botonNext = document.querySelector("#siguiente");
-const cardsContainer = document.querySelector("#cards-container");    
-const cardsPorPagina = 6;
-let paginaActual = 0;
-let contenidoCards = [];
-
-const path = new URLSearchParams(window.location.search);
-const categoria = path.get("categoria");
-
-const cargarProductos = async() => {
-  try{
-    const jsonURL = `../JSON/${categoria}.json`;
-    const respuesta = await fetch(jsonURL);
-    const data = await respuesta.json();
-
-    const productos = data[categoria];
-    contenidoCards = productos.map(prod => new Producto(
-      prod.id,
-      prod.imgSrc,
-      prod.titulo,
-      prod.precio,
-      prod.descripcion,
-      prod.link,
-      prod.cantidad,
-      prod.disponible
-    ));
-    contenidoCards.forEach(p => {
-      p.categoria = categoria;
-    })
-    
-  }catch(error){
-    console.log(error);
+      const container = document.querySelector("#cards-container");
+      container.insertAdjacentHTML("beforebegin", html);
+  } catch (error) {
+      console.error("Error al cargar los productos:", error);
   }
-}
-
-const renderizarCards = () => {
-  cardsContainer.innerHTML = "";
-  const start = paginaActual * cardsPorPagina;
-  const end = start + cardsPorPagina;
-  const cardAmostrar = contenidoCards.slice(start, end)
-  
-  cardAmostrar.forEach(p => {
-    cardsContainer.appendChild(p.mostrarCards(eliminarCards));
-  })
-}
-
-const eliminarCards = (producto) => {
-  const indiceAeliminar = contenidoCards.findIndex(prod => prod.id == producto.id)
-  if(indiceAeliminar !== -1){
-    contenidoCards.splice(indiceAeliminar, 1);
-    alert(`Producto: ${indiceAeliminar} eliminado.`)
-    renderizarCards();
-  }
-}
-
-const cambiarPagina = () => {
-  botonNext.addEventListener('click', () => {
-    if ((paginaActual + 1) * cardsPorPagina < contenidoCards.length) {
-      paginaActual++;
-      renderizarCards();
-    }
-  });
-  
-  botonPrev.addEventListener('click', () => {
-    if (paginaActual > 0) {
-      paginaActual--;
-      renderizarCards();
-    }
-  });
-}
-
-const deployarProductos = async() => {
-  await cargarProductos();
-  renderizarCards();
-  cambiarPagina();
-}
-
-document.addEventListener("DOMContentLoaded", deployarProductos);
+};
+document.addEventListener("DOMContentLoaded", cargarProductos);

@@ -1,5 +1,5 @@
 const contenedorNav = document.getElementById("header-container");
-/* const navHTML = `
+const navHTML = `
     <nav class="navbar navbar-expand-xl" id="navBar">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html"><img id="img-logo" src="./img/Blue Illustration Game Presentation-Photoroom.png" alt=""></a>
@@ -22,22 +22,22 @@ const contenedorNav = document.getElementById("header-container");
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./productos.html?categoria=procesadores">Procesadores</a>
+                        <a class="nav-link" href="productos.html">Procesadores</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./productos.html?categoria=placas">Placas de video</a>
+                        <a class="nav-link" href="productos.html">Placas de video</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./productos.html?categoria=memorias">Memorias RAM</a>
+                        <a class="nav-link" href="productos.html">Memorias RAM</a>
                     </li>
                 </ul>
 
                 <input id="prueba" type="checkbox" style="display: none">
                 <button id="btn-modo" class="btn"><i class="bi bi-brightness-high"></i></button>
                 <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
-                <a id="link-carrito" href="/carrito.html"><i class="bi bi-cart2"></i></a>
+                <a id="link-carrito" href="carrito.html"><i class="bi bi-cart2"></i></a>
 
                 <!--barra de busqueda comentada por el momento-->
                 <!-- <form class="d-flex" role="search">
@@ -47,7 +47,7 @@ const contenedorNav = document.getElementById("header-container");
             </div>
         </div>
     </nav>
-`; */
+`;
 
 //verificar estado null en la siguientes paginas
 const contenedorBtnSection = document.querySelector("#img-productos");
@@ -78,7 +78,7 @@ const linksCDN = `
     `
 
 const contenedorFooter = document.querySelector("footer");
-/* const footer = `
+const footer = `
     <div class="copyright">
         <p>Copyright © Todos los derechos reservados | Osnat 2024</p>
     </div>
@@ -88,7 +88,7 @@ const contenedorFooter = document.querySelector("footer");
         <a href="https://www.facebook.com/?locale=es_LA" target="_blank"><i class="bi bi-facebook"></i></a>
         <a href="https://www.tiktok.com/" target="_blank"><i class="bi bi-tiktok"></i></a>
         <a href="https://x.com/home?lang=es" target="_blank"><i class="bi bi-twitter-x"></i></a>
-    </div>` */
+    </div>`
 
 // INSERCIÓN DINÁMICA DE TODOS LOS COMPONENTES
 contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
@@ -190,7 +190,6 @@ function actualizarEstadoTema(){
         linkEstiloTema.setAttribute("href", "style/modoOscuro.css")
         contenedorImgLogo.setAttribute("src", "img/Blue Illustration Game Presentation-Photoroom.png")
     }
-
 }
 
 const miprueba = document.querySelector("#prueba");
