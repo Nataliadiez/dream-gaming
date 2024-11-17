@@ -19,11 +19,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //rutas
-
-app.get("/", (req, res)=> {
-    res.send("pagina principal");
-})
-
 app.use("/", router);
 
 const puerto = process.env.PORT;
