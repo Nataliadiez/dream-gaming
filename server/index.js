@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //deshabilita cors
 app.use(cors());
 require("dotenv").config();
+const puerto = process.env.PORT;
 
 //EJS
 app.set("view engine", "ejs");
@@ -33,9 +34,6 @@ app.get("/", async (req, res)=> {
 
 app.use("/", router);
 
-const puerto = process.env.PORT;
 app.listen(puerto, () => {
     console.log(`Servidor corriendo en puerto: ${puerto}`);
 })
-
-
