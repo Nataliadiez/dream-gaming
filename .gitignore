@@ -1,0 +1,14 @@
+# Node modules
+/node_modules/
+
+# Archivos de entorno
+.env
+
+# Logs
+*.log
+
+# Archivos de configuración de editor (VSCode, etc.)
+.vscode/
+
+# Archivos generados por el sistema operativo
+Thumbs.db
