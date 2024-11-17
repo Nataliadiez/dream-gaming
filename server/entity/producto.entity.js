@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../db/sequelizeConnection.js");
 
 const ProductoSequelize = sequelize.define("Producto", {
-    id:{
+    id_producto:{
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -32,6 +32,10 @@ const ProductoSequelize = sequelize.define("Producto", {
         type: DataTypes.STRING,
         allowNull: false,
     }
-})
+},
+{
+    timestamps: false, // Desactiva createdAt y updatedAt
+}
+);
 
 module.exports = ProductoSequelize;
