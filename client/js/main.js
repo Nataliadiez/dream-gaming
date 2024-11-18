@@ -127,8 +127,7 @@ const preguntarNombre = () => {
         modal.show();
     }
     const formNombre = document.querySelector("#nameForm");
-    formNombre.addEventListener("submit", (event) => {
-        event.preventDefault();
+    formNombre.addEventListener("submit", () => {
         const userName = document.querySelector("#name").value;
     
         if (userName) {

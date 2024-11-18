@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const ProductoSequelize = require("../entity/producto.entity.js");
 
 // Datos de ejemplo de productos
-const productos = [
+/* const arrayProductos = [
     {
         "id": 1,
         "imagen": "https://ultimainformatica.com/1282154-thickbox_default/team-group-delta-rgb-32gb-2x16gb-5600mhz-cl32-ddr5-negra.jpg",
@@ -94,20 +95,36 @@ const productos = [
         "categoria": "memorias"
     }
 ];
+ */
 
+router.get("/", async(req, res) => {
+    try{
+        const productos = await ProductoSequelize.findAll();
+        console.log(productos)
+        res.render("productos", { productos });
 
-router.get("/", (req, res) => {
-    res.render("productos", { productos });
-});
-
-
-router.get("/:id", (req, res) => {
-    const producto = productos.find((p) => p.id === parseInt(req.params.id));
-    if (producto) {
-        res.send(`Producto: ${producto.nombre}, Precio: $${producto.precio}`);
-    } else {
-        res.status(404).send("Producto no encontrado");
+    } catch(error){
+        res.status(500).send({error: "Error del servidor"});
     }
+    
 });
+
+
+router.get("/:id", async(req, res) => {
+    const productoId = parseInt(req.params.id);
+    try{
+        const producto = await ProductoSequelize.findByPk(productoId);
+        if (producto) {
+            return res.json(producto);
+        } else {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+    } catch(error){
+        res.status(500).send({error: "Error del servidor"});
+    }
+
+});
+
+
 
 module.exports = router;
