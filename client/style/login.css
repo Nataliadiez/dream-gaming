@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
-    position: relative; /* Necesario para el pseudo-elemento */
+    position: relative;
     background: url("../img/bk-login.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -64,7 +64,7 @@ body::before {
 }
 
 input {
-    width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
+    width: 100%;
     padding: 10px;
     border: 1px solid #633bc0;
     background-color: #3333337c;
@@ -78,6 +78,6 @@ input:focus{
 @media (max-width: 600px) {
     main {
         padding: 10px;
-        max-width: 90%; /* Más flexibilidad para pantallas pequeñas */
+        max-width: 90%;
     }
 }
