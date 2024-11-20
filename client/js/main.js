@@ -22,15 +22,15 @@ const navHTML = `
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Procesadores</a>
+                        <a class="nav-link" href="productos.html?categoria=procesadores">Procesadores</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Placas de video</a>
+                        <a class="nav-link" href="productos.html?categoria=placas">Placas de video</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Memorias RAM</a>
+                        <a class="nav-link" href="productos.html?categoria=memorias">Memorias RAM</a>
                     </li>
                 </ul>
 
@@ -127,8 +127,7 @@ const preguntarNombre = () => {
         modal.show();
     }
     const formNombre = document.querySelector("#nameForm");
-    formNombre.addEventListener("submit", (event) => {
-        event.preventDefault();
+    formNombre.addEventListener("submit", () => {
         const userName = document.querySelector("#name").value;
     
         if (userName) {

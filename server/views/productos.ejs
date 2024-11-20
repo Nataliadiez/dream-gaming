@@ -1,3 +1,4 @@
+<h1 class="text-center"><%= productos[0].categoria.toString().toUpperCase() %></h1>
 <div class="container">
     <div class="row">
         <% productos.forEach(producto => { %>
@@ -7,7 +8,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= producto.titulo %></h5>
                         <p class="card-text">$<%= producto.precio %></p>
-                        <a href="detalleProducto.html?id=<%= producto.id %>&categoria=<%= producto.categoria %>" class="btn btn-card">Ver más</a>
+                        <a href="detalleProducto.html?id=<%= producto.id_producto %>&categoria=<%= producto.categoria %>" class="btn btn-card">Ver más</a>
                     </div>
                 </div>
             </div>
