@@ -33,7 +33,6 @@ const VentasSequelize = sequelize.define("Ventas",
 }
 );
 
-// Relaciones
 Cliente.hasMany(VentasSequelize, { foreignKey: "id_cliente" });
 VentasSequelize.belongsTo(Cliente, { foreignKey: "id_cliente", targetKey: "id_cliente" });
 
