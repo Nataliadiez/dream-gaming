@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
         } else {
             productos = await ProductoSequelize.findAll();
         }
-
         console.log(productos);
         res.render("productos", { productos });
 
@@ -24,8 +23,6 @@ router.get("/", async (req, res) => {
         res.status(500).send({ error: "Error del servidor" });
     }
 });
-
-
 
 router.get("/:id", async(req, res) => {
     const productoId = parseInt(req.params.id);
@@ -39,7 +36,6 @@ router.get("/:id", async(req, res) => {
     } catch(error){
         res.status(500).send({error: "Error del servidor"});
     }
-
 });
 
 

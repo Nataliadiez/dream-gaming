@@ -10,6 +10,7 @@ const sequelize = require("./db/sequelizeConnection.js");
 const ProductoSequelize = require("./entity/producto.entity.js");
 const ClienteSequelize = require("./entity/cliente.entity.js");
 const VentasSequelize = require("./entity/ventas.entity.js");
+const UsuarioSequelize = require("./entity/usuario.entity.js");
 
 //parsea lo que llegue del body
 app.use(bodyParser.json());
