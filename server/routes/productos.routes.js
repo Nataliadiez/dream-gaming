@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
         } else {
             productos = await ProductoSequelize.findAll();
         }
-
         console.log(productos);
         res.render("productos", { productos });
 
@@ -75,5 +74,7 @@ router.get("/producto/:id", async(req, res) => {
 
     res.render("productos", { productos });
 });
+
+
 
 module.exports = router;

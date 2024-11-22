@@ -18,33 +18,34 @@ class Usuario {
         }
     }
 
-    static async crearUsuarioPredeterminado() {
-        let usuarioCreado = false;
-        const usuarios = await this.obtenerUsuarios();
-        if (usuarios.length === 0) {
-            const usuarioFijo = new Usuario("administrador123@gmail.com", "password123");
-            try {
-                const response = await fetch('http://localhost:3000/usuarios/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(usuarioFijo),
-                });
-                const data = await response.json();
-                if (data.success) {
-                    usuarioCreado = true;
-                } else {
-                    console.error("Error al registrar el usuario predeterminado:", data.message);
-                }
-            } catch (error) {
-                console.error("Error al crear el usuario predeterminado:", error);
-            }
-        }
-        return usuarioCreado;
-    }
-
     static async login(email, password) {
         try {
             const response = await fetch('http://localhost:3000/usuarios/login', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+    
+            if (response.ok) {
+                const result = await response.json();
+                alert(result.message);
+    
+                // Guarda el email del usuario como identificador
+                localStorage.setItem("usuarioLogueado", email);
+            } else {
+                const result = await response.json();
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error("Error al realizar el login:", error);
+            alert("Error en el servidor. Inténtelo nuevamente más tarde.");
+        }
+    }
+
+    
+    static async register(email, password) {
+        try {
+            const response = await fetch('http://localhost:3000/usuarios/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
@@ -52,13 +53,12 @@ class Usuario {
             const result = await response.json();
 
             if (result.success) {
-                return "Verificado";
+                alert(result.message);
             } else {
-                return result.message || "Error en los datos";
+                alert(result.message);
             }
         } catch (error) {
             console.error("Error al realizar el login:", error);
-            return "Error de conexión al servidor";
         }
     }
 }
