@@ -60,3 +60,11 @@ h1{
 #precio{
     color: black;
 }
+
+.contenido-reducido{
+    background-color: #e1c8eb !important;
+}
+
+.contenido-producto{
+    background-color: #EBDCF4 !important;
+}

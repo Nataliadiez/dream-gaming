@@ -4,6 +4,9 @@ const productoId = params.get("id"); //1, 2, 3, etc.
 const contenedorDetalleProducto = document.querySelector("#contenedor-producto");
 const contenedorModal = document.querySelector('#modalAgregadoCarrito');
 
+const link = `<link rel="stylesheet" href="./style/detalle.css">`;
+document.head.insertAdjacentHTML("beforeend", link);
+
 const cambiarCantidad = (monto) => {
     const input = document.querySelector("#cantidadProducto");
 
@@ -27,7 +30,7 @@ const cargarProductoDetalle = async () => {
                     <img src="${producto.imagen}" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-6">
-                    <div class="card-body">
+                    <div class="card-body card-theme">
                         <h5 class="card-title">${producto.titulo}</h5>
                         <p class="card-text parrafo-descripcion">${producto.descripcion}</p>
                         

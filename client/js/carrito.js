@@ -6,6 +6,9 @@ const btnConfirmarCompra = document.querySelector("#confirmarComprar");
 
 let productoAEliminar;
 
+const linkCarrito = `<link rel="stylesheet" href="./style/carrito.css">`;
+document.head.insertAdjacentHTML("beforeend", linkCarrito);
+
 btnEliminar.addEventListener("click", () => {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     carrito = carrito.filter(item => item.id !== productoAEliminar);
