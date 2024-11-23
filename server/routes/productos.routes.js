@@ -38,6 +38,21 @@ router.get("/:id", async(req, res) => {
     }
 });
 
+router.post("/:id", async(req, res) => {
+    const producto = req.body;
+    try{
+        const productoNuevo = await ProductoSequelize.create(producto);
+        if (producto) {
+            return res.json(productoNuevo);
+        } else {
+            return res.status(404).json({ error: "Producto no guardado" });
+        }
+    } catch(error){
+        res.status(500).send({error: "Error del servidor"});
+    }
+});
+
+
 
 
 module.exports = router;
