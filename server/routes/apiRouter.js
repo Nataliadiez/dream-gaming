@@ -12,3 +12,5 @@ router.use("/usuarios", usuariosRoutes);
 //router.use("/ventas", ventasRoutes);
 
 module.exports = router;
+
+module.exports = router;

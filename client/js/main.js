@@ -1,4 +1,6 @@
+
 const contenedorNav = document.getElementById("header-container");
+
 const navHTML = `
     <nav class="navbar navbar-expand-xl" id="navBar">
         <div class="container-fluid">
@@ -51,7 +53,12 @@ const navHTML = `
 
 //verificar estado null en la siguientes paginas
 const contenedorBtnSection = document.querySelector("#img-productos");
+let estadoBtnSection = true;
+if(contenedorBtnSection === null){
+    estadoBtnSection = false;
+}
 
+//cambio de botones 
 const btnSectionsDark = `
     <a href="./productos.html?categoria=memorias"><img class="btn-sections" src="./img/Memorias ram.png" alt=""></a>
     <a href="./productos.html?categoria=placas"><img class="btn-sections" src="./img/PLACAS.png" alt=""></a>
@@ -62,8 +69,7 @@ const btnSectionsLight = `
     <a href="./productos.html?categoria=placas"><img class="btn-sections" src="img/PLACAS-CLARO.png" alt=""></a>
     <a href="./productos.html?categoria=procesadores"><img class="btn-sections" src="img/PROCESADORES-CLARO.png" alt=""></a>`;
 
-
-
+    //cambio de stylesheet
 const linksCDN = `
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link
@@ -73,9 +79,25 @@ const linksCDN = `
         crossorigin="anonymous"
     />
     <link rel="icon" type="image/png" href="./img/favicon.png">
-    <link rel="stylesheet" href="./style/style.css"/>
-    <link id="linkthemeStyle" rel="stylesheet" href="./style/modoOscuro.css"/> 
-    `
+    <link rel="stylesheet" href="./style/style.css"/>`
+
+
+
+let estado = JSON.parse(localStorage.getItem("mode")) ?? true;
+let hojaModo;
+if(!estado){
+    hojaModo = `<link id="linkthemeStyle" rel="stylesheet" href="./style/modoClaro.css"/>`;
+    if(estadoBtnSection){
+        contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsLight)
+    }
+}
+else{
+    hojaModo = `<link id="linkthemeStyle" rel="stylesheet" href="./style/modoOscuro.css"/>`;
+    if(estadoBtnSection){
+        contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsDark)
+    }
+    
+}
 
 const contenedorFooter = document.querySelector("footer");
 const footer = `
@@ -92,8 +114,19 @@ const footer = `
 
 // INSERCIÓN DINÁMICA DE TODOS LOS COMPONENTES
 contenedorNav.insertAdjacentHTML('afterbegin', navHTML);
-document.head.insertAdjacentHTML("afterbegin", linksCDN);
+document.head.insertAdjacentHTML("beforeend", linksCDN);
+document.head.insertAdjacentHTML("beforeend", hojaModo);
 contenedorFooter.insertAdjacentHTML("afterbegin", footer);
+
+const contenedorImgLogo = document.querySelector("#img-logo");
+
+if(estado){
+    contenedorImgLogo.setAttribute("src", "img/Blue Illustration Game Presentation-Photoroom.png")
+}
+else{
+    contenedorImgLogo.setAttribute("src", "img/Blue_Illustration_Game_Presentation_1.png")
+}
+
 
 const modalRegistroNombre = `
     <div class="modal fade" id="nameRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -144,21 +177,15 @@ const preguntarNombre = () => {
             }
         });
     });
-
-    if(contenedorBtnSection){
-        contenedorBtnSection.insertAdjacentHTML("beforeend", btnSectionsDark)
-    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     preguntarNombre();
 });
 
-
-const contenedorImgLogo = document.querySelector("#img-logo");
+//----------------------------------------
 
 function actualizarEstadoTema(){
-
 
     //CAMBIO EN BOTONES
     if(contenedorBtnSection)
@@ -169,27 +196,31 @@ function actualizarEstadoTema(){
     //CAMBIO EN FONDO
     let linkEstiloTema = document.querySelector("#linkthemeStyle");
 
-    if(!miprueba.checked){
-        miprueba.checked = true;
+
+    if(estado){
+        localStorage.setItem("mode", false);
+        estado = JSON.parse(localStorage.getItem("mode"));
         if(contenedorBtnSection)
         {
             contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsLight);
         }
-        linkEstiloTema.setAttribute("href", "style/modoClaro.css");
-        contenedorImgLogo.setAttribute("src", "img/Blue_Illustration_Game_Presentation_1.png")
-
+        linkEstiloTema.setAttribute("href", "./style/modoClaro.css");
+        contenedorImgLogo.setAttribute("src", "img/Blue_Illustration_Game_Presentation_1.png");
     }
     else{
-        miprueba.checked = false;
+        localStorage.setItem("mode", true);
+        estado = JSON.parse(localStorage.getItem("mode"));
         if(contenedorBtnSection)
         {
             contenedorBtnSection.insertAdjacentHTML('beforeend', btnSectionsDark);
         }
 
-        linkEstiloTema.setAttribute("href", "style/modoOscuro.css")
-        contenedorImgLogo.setAttribute("src", "img/Blue Illustration Game Presentation-Photoroom.png")
+        linkEstiloTema.setAttribute("href", "./style/modoOscuro.css");
+        contenedorImgLogo.setAttribute("src", "img/Blue Illustration Game Presentation-Photoroom.png");
     }
 }
+//----------------------------------------
+
 
 const miprueba = document.querySelector("#prueba");
 const btnCambioTema = document.querySelector("#btn-modo");

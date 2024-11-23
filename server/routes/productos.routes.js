@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+
 router.get("/:id", async(req, res) => {
     const productoId = parseInt(req.params.id);
     try{
@@ -52,6 +53,42 @@ router.post("/:id", async(req, res) => {
     }
 });
 
+
+
+router.get("/producto/:id", async(req, res) => {
+    let tamano = 6; 
+    const { id } = req.params;
+    const { categoria } = req.query;
+    let offset = (parseInt(id) - 1) * tamano;
+
+    let whereClause = {};
+    if (categoria) {
+        whereClause = { categoria };
+    }
+
+    let totalProductos = await ProductoSequelize.count({where: whereClause});
+    console.log(totalProductos);
+    while(offset > totalProductos){
+        offset -= tamano;
+    }
+
+    let productos = await ProductoSequelize.findAll({
+        where: whereClause,
+        limit: tamano,
+        offset,
+    });
+
+    if(!productos){
+        offset = (parseInt(id) - 2) * tamano;
+        productos = await ProductoSequelize.findAll({
+            where: whereClause,
+            limit: tamano,
+            offset,
+        });
+    }
+
+    res.render("productos", { productos });
+});
 
 
 
