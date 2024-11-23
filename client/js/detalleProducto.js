@@ -56,6 +56,7 @@ const cargarProductoDetalle = async () => {
 
 const agregarAlCarrito = (producto) => {
     const cantidad = parseInt(document.querySelector("#cantidadProducto").value);
+    console.log(producto.id)
     const productoCarrito = {
         id: producto.id,
         titulo: producto.titulo,

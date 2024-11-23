@@ -30,7 +30,6 @@ class Usuario {
                 const result = await response.json();
                 alert(result.message);
     
-                // Guarda el email del usuario como identificador
                 localStorage.setItem("usuarioLogueado", email);
             } else {
                 const result = await response.json();

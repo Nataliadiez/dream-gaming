@@ -67,7 +67,6 @@ const cambiarCantidad = (idProducto, monto) => {
     if (producto) {
         let nuevaCantidad = producto.cantidadElegida + monto;
 
-        // Verifica que no exceda la cantidad disponible
         if (nuevaCantidad > producto.stockDisponible) {
             stockSpan.textContent = producto.stockDisponible;
             const modalStock = new bootstrap.Modal(document.querySelector("#modalStock"));
@@ -93,7 +92,6 @@ const actualizarCantidad = (idProducto, cantidad) => {
     if (producto) {
         const nuevaCantidad = Math.max(1, parseInt(cantidad));
 
-        // Verifica que no exceda la cantidad disponible
         if (nuevaCantidad > producto.stockDisponible) {
             alert(`Solo hay ${producto.stockDisponible} unidades disponibles.`);
             return;
@@ -101,7 +99,6 @@ const actualizarCantidad = (idProducto, cantidad) => {
 
         producto.cantidadElegida = nuevaCantidad;
 
-        // Actualiza el localStorage
         localStorage.setItem("carrito", JSON.stringify(carrito));
         cargarCarrito();
     }
