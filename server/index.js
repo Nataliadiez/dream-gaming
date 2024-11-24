@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const router = require("./routes/apiRouter.js");
-const path = require("path");
+const path = require('path');
 
 const sequelize = require("./db/sequelizeConnection.js");
 
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //deshabilita cors
 app.use(cors());
 require("dotenv").config();
-const puerto = process.env.PORT;
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //EJS
 app.set("view engine", "ejs");
@@ -36,6 +36,6 @@ app.get("/", async (req, res)=> {
 
 app.use("/", router);
 
-app.listen(puerto, () => {
-    console.log(`Servidor corriendo en puerto: ${puerto}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor corriendo en puerto: ${process.env.PORT}`);
 })

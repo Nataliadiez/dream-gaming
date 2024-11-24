@@ -27,13 +27,15 @@ class Usuario {
             });
     
             if (response.ok) {
-                const result = await response.json();
-                alert(result.message);
-    
                 localStorage.setItem("usuarioLogueado", email);
             } else {
                 const result = await response.json();
-                alert(result.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: result.message,
+                    icon: 'error',
+                    confirmButtonText: 'Cool'
+                })
             }
         } catch (error) {
             console.error("Error al realizar el login:", error);
@@ -52,9 +54,19 @@ class Usuario {
             const result = await response.json();
 
             if (result.success) {
-                alert(result.message);
+                Swal.fire({
+                    title: 'correcto!',
+                    text: result.message,
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
             } else {
-                alert(result.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: result.message,
+                    icon: 'error',
+                    confirmButtonText: 'Cool'
+                })
             }
         } catch (error) {
             console.error("Error al realizar el login:", error);

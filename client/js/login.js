@@ -1,70 +1,5 @@
 import Usuario from './usuario.js';
 
-const btnAccesoRapido = document.querySelector("#acceso-rapido");
-const tituloForm = document.querySelector("#titulo-form");
-const btnIngresar = document.querySelector("#btn-ingresar");
-const btnLimpiar = document.querySelector("#limpiar");
-let emailInput = document.querySelector("#email");
-let passwordInput = document.querySelector("#password");
-
-const linkLogin = document.querySelector("#link-loguearse");
-const linkRegister = document.querySelector("#link-registrarse");
-const seccionLogin = document.querySelector("#section-login");
-
-async function verificarAutenticacion() {
-    const email = localStorage.getItem("usuarioLogueado");
-
-    if (email) {
-        admin.mostrarPanelAdmin()
-    }
-}
-document.addEventListener("DOMContentLoaded", verificarAutenticacion);
-
-const limpiarCampos = () => {
-    emailInput.value = "";
-    passwordInput.value = "";
-}
-
-const login = async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    if (email !== "" && password !== "") {
-        await Usuario.login(email, password);
-        limpiarCampos();
-        location.reload();
-    } else {
-        alert("Los campos no pueden estar vacíos");
-    }
-};
-
-const register = async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    if (email !== "" && password !== "") {
-        await Usuario.register(email, password);
-        limpiarCampos();
-    } else {
-        alert("Los campos no pueden estar vacíos");
-    }
-};
-
-const accederRapido = async () => {
-    try {
-        const usuarios = await Usuario.obtenerUsuarios();
-
-        if (usuarios && usuarios.length > 0) {
-            emailInput.value = usuarios[0].email;
-            passwordInput.value = usuarios[0].password;
-        } else {
-            alert("No hay usuarios predeterminados disponibles");
-        }
-    } catch (error) {
-        console.error("Error al obtener usuarios para acceso rápido:", error);
-    }
-};
-
 const selectors = {
     btnAccesoRapido: document.querySelector("#acceso-rapido"),
     tituloForm: document.querySelector("#titulo-form"),
@@ -74,8 +9,19 @@ const selectors = {
     passwordInput: document.querySelector("#password"),
     linkLogin: document.querySelector("#link-loguearse"),
     linkRegister: document.querySelector("#link-registrarse"),
-    seccionLogin: document.querySelector("#section-login")
+    seccionLogin: document.querySelector("#section-login"),
+    seccionProductos: document.querySelector("#section-productos")
 };
+
+
+async function verificarAutenticacion() {
+    const email = localStorage.getItem("usuarioLogueado");
+
+    if (email) {
+        admin.mostrarPanelAdmin()
+    }
+}
+document.addEventListener("DOMContentLoaded", verificarAutenticacion);
 
 // Funciones de autenticación
 const auth = {
@@ -95,7 +41,12 @@ const auth = {
             this.limpiarCampos();
             location.reload();
         } else {
-            alert("Los campos no pueden estar vacíos");
+            Swal.fire({
+                title: 'Error!',
+                text: 'Los campos no pueden estar vacíos',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
         }
     },
 
@@ -107,7 +58,12 @@ const auth = {
             await Usuario.register(email, password);
             this.limpiarCampos();
         } else {
-            alert("Los campos no pueden estar vacíos");
+            Swal.fire({
+                title: 'Error!',
+                text: 'Los campos no pueden estar vacíos',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
         }
     },
 
@@ -127,27 +83,33 @@ const admin = {
     mostrarPanelAdmin() {
         selectors.seccionLogin.innerHTML = `
             <h2>Panel de Administración</h2>
-            <div class="admin-container">
                 <div class="admin-form">
-                    <h3>Agregar/Editar Producto</h3>
-                    <form id="form-producto" class="div-flex">
+                    <h4>Agregar/Editar Producto</h4>
+                    <form id="form-producto" class="div-flex" >
+                        <input type="hidden" id="id-producto">
+
                         <label for="titulo">Título del Producto</label>
                         <input id="titulo-producto" type="text" required>
 
                         <label for="precio">Precio</label>
                         <input id="precio-producto" type="number" step="0.01" required>
 
-                        <label for="imagen">URL de la Imagen</label>
-                        <input id="imagen-producto" type="url" required>
+                        <label for="imagen">Imagen Actual</label>
+                        <div id="imagen-actual-container">
+                            <img id="imagen-actual" src="" alt="Imagen actual del producto" style="max-width: 100px;">
+                        </div>
+
+                        <label for="imagen">Nueva Imagen (opcional)</label>
+                        <input id="imagen-producto" type="file" name="foto" accept="image/*">
                         
                         <label for="descripcion">Descripción</label>
                         <textarea id="descripcion-producto"></textarea>
 
                         <label for="categoria">Categoría</label>
                         <select id="categoria-producto" required>
-                            <option value="Procesadores">Procesadores</option>
-                            <option value="Placas de Video">Placas de Video</option>
-                            <option value="Memorias RAM">Memorias RAM</option>
+                            <option value="procesadores">Procesadores</option>
+                            <option value="placas">Placas de Video</option>
+                            <option value="memorias">Memorias RAM</option>
                         </select>
 
                         <div class="form-check">
@@ -165,17 +127,22 @@ const admin = {
                         </div>
                     </form>
                 </div>
+                <div class="div-flex-row">
+                    <button class="btn-form-login" id="btn-cerrar-sesion">
+                        Cerrar Sesión
+                    </button>
 
+                    <button class="btn-form-login" id="btn-descargar-ventas">
+                        Descargar ventas
+                    </button>
+                </div>
+                
+        `;
+        selectors.seccionProductos.innerHTML = `
                 <div class="productos-list">
                     <h3>Listado de Productos</h3>
                     <div id="productos-container"></div>
-                </div>
-
-                <button class="btn-form-login" id="btn-cerrar-sesion">
-                    Cerrar Sesión
-                </button>
-            </div>
-        `;
+                </div>`
         this.setupAdminEventListeners();
     },
 
@@ -206,10 +173,11 @@ const admin = {
     },
 
     obtenerDatosProducto() {
+        const imagenInput = document.querySelector("#imagen-producto");
         return {
             titulo: document.querySelector("#titulo-producto").value,
             precio: parseFloat(document.querySelector("#precio-producto").value),
-            imagen: document.querySelector("#imagen-producto").value,
+            imagen: imagenInput.files[0],
             descripcion: document.querySelector("#descripcion-producto").value,
             categoria: document.querySelector("#categoria-producto").value,
             disponible: document.querySelector("#disponible-producto").checked ? 1 : 0
@@ -217,25 +185,45 @@ const admin = {
     },
 
     async guardarProducto(producto) {
+        const id = document.querySelector("#id-producto").value;
+        const method = id ? 'PUT' : 'POST';
+        const url = id ? `http://localhost:3000/productos/${id}` : 'http://localhost:3000/productos';
+    
+        const formData = new FormData();
+        formData.append('titulo', producto.titulo);
+        formData.append('precio', producto.precio);
+        formData.append('descripcion', producto.descripcion);
+        formData.append('categoria', producto.categoria);
+        formData.append('disponible', producto.disponible);
+        
+        if (producto.imagen instanceof File) {
+            formData.append('imagen', producto.imagen);
+        }
+    
         try {
-            const response = await fetch('http://localhost:3000/productos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(producto)
+            const response = await fetch(url, {
+                method: method,
+                body: formData
             });
-
+    
             if (!response.ok) {
-                throw new Error('Error al guardar el producto');
+                const error = await response.json();
+                throw new Error(error.error || 'Error al guardar el producto');
             }
-
-            alert('Producto guardado exitosamente');
+            const data = await response.json();
+            Swal.fire({
+                title: 'Correcto!',
+                text: data.mensaje,
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            })
+            return data;
         } catch (error) {
             console.error("Error:", error);
-            alert('Error al guardar el producto');
+            throw error;
         }
     },
+    
 
     async cargarProductos() {
         try {
@@ -280,21 +268,28 @@ const admin = {
         try {
             const response = await fetch(`http://localhost:3000/productos/${id}`);
             const producto = await response.json();
-            
-            const tituloInput = document.querySelector("#titulo-producto");
-            const precioInput = document.querySelector("#precio-producto");
-            const imagenInput = document.querySelector("#imagen-producto");
-            const descripcionInput = document.querySelector("#descripcion-producto");
-            const categoriaInput = document.querySelector("#categoria-producto");
-            const disponibleInput = document.querySelector("#disponible-producto");
 
+            const idInput = document.querySelector("#id-producto") || "";
+            const tituloInput = document.querySelector("#titulo-producto") || "";
+            const precioInput = document.querySelector("#precio-producto") || 0;
+            const descripcionInput = document.querySelector("#descripcion-producto") || "";
+            const categoriaInput = document.querySelector("#categoria-producto") || "procesadores";
+            const disponibleInput = document.querySelector("#disponible-producto");
+            
+
+            if (idInput) idInput.value = producto.id_producto;
             if (tituloInput) tituloInput.value = producto.titulo;
             if (precioInput) precioInput.value = producto.precio;
-            if (imagenInput) imagenInput.value = producto.imagen;
+            //TODO: modificar para subir la imagen
             if (descripcionInput) descripcionInput.value = producto.descripcion || '';
             if (categoriaInput) categoriaInput.value = producto.categoria;
-            if (disponibleInput) disponibleInput.checked = producto.disponible === 1;
-            
+            if (disponibleInput) disponibleInput.checked = 1;
+
+            const imagenActual = document.querySelector("#imagen-actual");
+            if (imagenActual) {
+                imagenActual.src = producto.imagen || "";
+                imagenActual.alt = `Imagen de ${producto.titulo}`;
+            }
         } catch (error) {
             console.error("Error al cargar el producto:", error);
         }
@@ -356,21 +351,3 @@ selectors.linkRegister.addEventListener("click", () => {
 window.admin = admin;
 
 
-btnIngresar.addEventListener("click", () => {
-    if (tituloForm.innerHTML === "Formulario de Login") {
-        login();
-    } else {
-        register();
-    }
-});
-
-btnAccesoRapido.addEventListener("click", accederRapido);
-btnLimpiar.addEventListener("click", limpiarCampos);
-
-linkLogin.addEventListener("click", () => {
-    tituloForm.innerHTML = "Formulario de Login";
-});
-
-linkRegister.addEventListener("click", () => {
-    tituloForm.innerHTML = "Formulario de Registro";
-});

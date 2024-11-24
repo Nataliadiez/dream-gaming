@@ -38,7 +38,7 @@ const navHTML = `
 
                 <input id="prueba" type="checkbox" style="display: none">
                 <button id="btn-modo" class="btn"><i class="bi bi-brightness-high"></i></button>
-                <a href="./login.html" class="btn" type="button" id="loginButton">Login</a>
+                <a href="./login.html" class="btn" type="button" id="loginButton">Admin</a>
                 <a id="link-carrito" href="carrito.html"><i class="bi bi-cart2"></i></a>
 
                 <!--barra de busqueda comentada por el momento-->
@@ -71,6 +71,7 @@ const btnSectionsLight = `
 
     //cambio de stylesheet
 const linksCDN = `
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
