@@ -1,6 +1,5 @@
 const contenedorCarrito = document.querySelector("#contenedor-carrito");
 const btnComprar = document.querySelector("#btn-comprar");
-const stockSpan = document.querySelector("#stockDisponible");
 const btnEliminar = document.querySelector("#confirmarEliminar");
 const btnConfirmarCompra = document.querySelector("#confirmarComprar");
 
@@ -70,13 +69,6 @@ const cambiarCantidad = (idProducto, monto) => {
     if (producto) {
         let nuevaCantidad = producto.cantidadElegida + monto;
 
-        if (nuevaCantidad > producto.stockDisponible) {
-            stockSpan.textContent = producto.stockDisponible;
-            const modalStock = new bootstrap.Modal(document.querySelector("#modalStock"));
-            modalStock.show();
-            return;
-        }
-
         if (nuevaCantidad < 1) {
             nuevaCantidad = 1;
         }
@@ -94,12 +86,6 @@ const actualizarCantidad = (idProducto, cantidad) => {
 
     if (producto) {
         const nuevaCantidad = Math.max(1, parseInt(cantidad));
-
-        if (nuevaCantidad > producto.stockDisponible) {
-            alert(`Solo hay ${producto.stockDisponible} unidades disponibles.`);
-            return;
-        }
-
         producto.cantidadElegida = nuevaCantidad;
 
         localStorage.setItem("carrito", JSON.stringify(carrito));

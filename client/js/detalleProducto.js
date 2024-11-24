@@ -50,6 +50,7 @@ const cargarProductoDetalle = async () => {
         `
         contenedorDetalleProducto.insertAdjacentHTML("beforeend", contenido);
         const btnAgregarCarrito = document.querySelector("#agregarCarrito");
+        console.log(producto.id_producto)
         btnAgregarCarrito.addEventListener("click", () => agregarAlCarrito(producto));
 
     } catch (error) {
@@ -59,15 +60,14 @@ const cargarProductoDetalle = async () => {
 
 const agregarAlCarrito = (producto) => {
     const cantidad = parseInt(document.querySelector("#cantidadProducto").value);
-    console.log(producto.id)
     const productoCarrito = {
-        id: producto.id,
+        id: producto.id_producto,
         titulo: producto.titulo,
         precio: producto.precio,
         cantidadElegida: cantidad,
         imagen: producto.imagen,
     };
-
+    console.log(productoCarrito)
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     const productoExistente = carrito.find(item => item.id === productoCarrito.id);

@@ -144,7 +144,7 @@ const modalRegistroNombre = `
                             <input type="text" class="form-control" id="name" required>
                             <div id="textHelp" class="form-text">Este campo no puede estar vacío</div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="btn" id="btn-modal">Enviar</button>
                     </form>
                 </div>
             </div>
@@ -167,6 +167,7 @@ const preguntarNombre = () => {
         if (userName) {
             localStorage.setItem('nombreUsuario', userName);
             modal.hide();
+            location.reload();
         }
     });
     

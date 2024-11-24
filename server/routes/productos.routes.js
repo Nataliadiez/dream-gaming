@@ -4,6 +4,7 @@ const ProductoSequelize = require("../entity/producto.entity.js");
 const multer = require("multer");
 const path = require("path");
 const fs = require('fs');
+const validarProductos = require("../middlewares/validarProductos.middleware.js");
 
 // Crear el directorio de uploads si no existe
 const uploadsDir = path.join(__dirname, '..', 'uploads');
@@ -52,7 +53,7 @@ router.get("/:id", async(req, res) => {
 });
 
 //subir producto nuevo
-router.post("/", upload.single("imagen"), async (req, res) => {
+router.post("/", upload.single("imagen"), validarProductos, async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ error: "No se ha subido ninguna imagen" });

@@ -21,7 +21,7 @@ const ProductoSequelize = sequelize.define("Producto", {
     },
     descripcion:{
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: false,
     },
     disponible:{
         type: DataTypes.BOOLEAN,
