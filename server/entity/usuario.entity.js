@@ -15,6 +15,10 @@ const UsuarioSequelize = sequelize.define("Usuario", {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    iv: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
 },
 {
     timestamps: false, // Desactiva createdAt y updatedAt

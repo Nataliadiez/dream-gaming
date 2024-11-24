@@ -8,7 +8,5 @@ router.use("/productos", productosRoutes);
 router.use("/ticketCompra", ticketRoutes)
 router.use("/usuarios", usuariosRoutes);
 //router.use("/ventas", ventasRoutes);
-//router.use("/admin", adminRoutes);
-//router.use("/ventas", ventasRoutes);
 
 module.exports = router;

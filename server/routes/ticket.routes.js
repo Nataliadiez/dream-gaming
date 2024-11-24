@@ -19,15 +19,10 @@ router.get("/:id", (req, res) => {
 
 
 module.exports = router;
-//Oscar
+
 //carrito
 //ticket de ejs
-
-
 //descargar excel
-//carga de imagenes 
 //middlewares
-
-//Natt
 //contraseña encriptada
-//crud del admin - lista de productos
+

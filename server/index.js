@@ -27,7 +27,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //rutas
-
 app.get("/", async (req, res)=> {
     await sequelize.sync({force: true});
     res.send("pagina principal");

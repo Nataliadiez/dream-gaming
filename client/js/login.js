@@ -14,7 +14,7 @@ const selectors = {
 };
 
 
-async function verificarAutenticacion() {
+const verificarAutenticacion = async() => {
     const email = localStorage.getItem("usuarioLogueado");
 
     if (email) {
@@ -308,7 +308,12 @@ const admin = {
                 }
             } catch (error) {
                 console.error("Error al eliminar el producto:", error);
-                alert('Error al eliminar el producto');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error al eliminar el producto',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
             }
         }
     }
@@ -326,15 +331,22 @@ selectors.btnIngresar.addEventListener("click", () => {
 
 selectors.btnAccesoRapido.addEventListener("click", async () => {
     try {
-        const usuarios = await Usuario.obtenerUsuarios();
-        if (usuarios && usuarios.length > 0) {
-            selectors.emailInput.value = usuarios[0].email;
-            selectors.passwordInput.value = usuarios[0].password;
+        const response = await fetch("http://localhost:3000/usuarios/inicio-rapido"); // Llamada al endpoint de inicio rápido
+        const data = await response.json();
+
+        if (data.success) {
+            selectors.emailInput.value = data.email;
+            selectors.passwordInput.value = data.password; // Contraseña desencriptada
         } else {
-            alert("No hay usuarios predeterminados disponibles");
+            Swal.fire({
+                title: 'Error en acceso rápido',
+                text: data.message,
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
         }
     } catch (error) {
-        console.error("Error al obtener usuarios para acceso rápido:", error);
+        console.error("Error en acceso rápido:", error);
     }
 });
 
@@ -349,5 +361,3 @@ selectors.linkRegister.addEventListener("click", () => {
 });
 
 window.admin = admin;
-
-
