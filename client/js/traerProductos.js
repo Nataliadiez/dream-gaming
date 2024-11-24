@@ -20,7 +20,6 @@ function PaginaAnterior(){
         pagina -= 1;
         cargarProductos(pagina);
     }
-
 }
 
 const cargarProductos = async (num) => {

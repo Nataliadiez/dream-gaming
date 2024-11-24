@@ -7,47 +7,12 @@ const traerContenidoCarrito = () => {
     return carrito || [];
 }
 
-const pintarTicket = () => {
+const pintarTicket = async() => {
     const carrito = traerContenidoCarrito();
-    let totalCompra = 0;
-    const filas = carrito.map(p => {
-        const precioProducto = p.precio * p.cantidadElegida;
-        totalCompra += precioProducto;
-        return `
-            <tr>
-                <th scope="row">${p.titulo}</th>
-                <td>${p.cantidadElegida}</td>
-                <td>${precioProducto}</td>
-            </tr>
-        `
-    }).join("")
     const contenidoTicket = `
     <h1>Ticket de compra</h1>
         <p>Compra número #15462313</p>
-        <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${filas}
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td>Total: ${totalCompra}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div id="div-flex">
-                <p>Gracias por su compra!</p>
-                <p>www.dreaming-game.com.ar</p>
-            </div>
-
+        <div class="container" id="contenedorParaTicket">
             <div id="contenedor-botones">
                 <button class="btn btn-primary" id="comprarDeNuevo">Comprar nuevamente</button>
                 <button class="btn btn-primary" id="imprimirTicket">Imprimir ticket</button>
@@ -55,6 +20,20 @@ const pintarTicket = () => {
         </div>
     `
     contenedorTicket.insertAdjacentHTML("beforeend", contenidoTicket);
+    const contenedor = document.querySelector("#contenedorParaTicket");
+    console.log(carrito)
+
+    const response = await fetch("http://localhost:3000/ventas/ticket", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ carrito }),
+    });
+
+    const contenidoTicketEJS = await response.text();
+    contenedor.insertAdjacentHTML("beforebegin", contenidoTicketEJS);
+    
     const btnImprimirTicket = document.querySelector("#imprimirTicket");
     const btnNuevaCompra = document.querySelector("#comprarDeNuevo")
     btnImprimirTicket.addEventListener("click", imprimirTicket)

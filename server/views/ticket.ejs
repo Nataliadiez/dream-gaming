@@ -1,0 +1,30 @@
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% carrito.forEach(function(p) { %>
+                <% const precioProducto = p.precio * p.cantidadElegida; %>
+                <tr>
+                    <th scope="row"><%= p.titulo %></th>
+                    <td><%= p.cantidadElegida %></td>
+                    <td><%= precioProducto %></td>
+                </tr>
+            <% }); %>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Total: <%= totalCompra %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="div-flex">
+        <p>Gracias por su compra!</p>
+        <p>www.dreaming-game.com.ar</p>
+    </div>

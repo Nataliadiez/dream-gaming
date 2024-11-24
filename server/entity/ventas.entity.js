@@ -9,8 +9,8 @@ const VentasSequelize = sequelize.define("Ventas",
         type: DataTypes.INTEGER,
         primaryKey: true,
         references: {
-            model: Cliente, // Referencia al modelo Cliente
-            key: "id_cliente", // Columna referenciada en Cliente
+            model: Cliente,
+            key: "id_cliente",
         },
         allowNull: false,
     },
@@ -18,8 +18,8 @@ const VentasSequelize = sequelize.define("Ventas",
         type: DataTypes.INTEGER,
         primaryKey: true,
         references: {
-            model: Producto, // Referencia al modelo Producto
-            key: "id_producto", // Columna referenciada en Producto
+            model: Producto,
+            key: "id_producto",
         },
         allowNull: false,
     },
