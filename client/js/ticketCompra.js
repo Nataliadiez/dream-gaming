@@ -9,6 +9,7 @@ const traerContenidoCarrito = () => {
 
 const pintarTicket = async() => {
     const carrito = traerContenidoCarrito();
+    const cliente = localStorage.getItem("nombreUsuario");
     const contenidoTicket = `
     <h1>Ticket de compra</h1>
         <p>Compra número #15462313</p>
@@ -21,7 +22,6 @@ const pintarTicket = async() => {
     `
     contenedorTicket.insertAdjacentHTML("beforeend", contenidoTicket);
     const contenedor = document.querySelector("#contenedorParaTicket");
-    console.log(carrito)
 
     const response = await fetch("http://localhost:3000/ventas/ticket", {
         method: 'POST',
@@ -38,6 +38,20 @@ const pintarTicket = async() => {
     const btnNuevaCompra = document.querySelector("#comprarDeNuevo")
     btnImprimirTicket.addEventListener("click", imprimirTicket)
     btnNuevaCompra.addEventListener("click", comprarNuevamente);
+
+    const response_venta = await fetch("http://localhost:3000/ventas", {
+        method: "POST",
+        header:{
+            'Content-Type': 'application/json',
+        },
+        body:{
+            carrito: JSON.stringify({ carrito }), 
+            nombre_cliente: "Natt",
+        }
+    });
+
+    console.log(response_venta.json());
+
 }
 
 const imprimirTicket = () => {

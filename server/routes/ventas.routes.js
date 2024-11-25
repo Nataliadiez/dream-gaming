@@ -1,14 +1,27 @@
 const express = require("express");
 const router = express.Router();
+const ClienteSequelize = require("../entity/cliente.entity.js");
+const ProductoSequelize = require("../entity/producto.entity.js");
 const VentaSequelize = require("../entity/ventas.entity.js");
-
-//ver si uso multer para manejar el excel
+const { DATE } = require("sequelize");
 
 //obtener todas las ventas
 router.get("/", async(req,res)=> {
     try{
-        const ventas = await VentaSequelize.findAll();
-        res.status(200).json({ventas})
+        const ventas = VentaSequelize.findAll({
+            include: [
+                {
+                    model: ClienteSequelize,
+                    attributes: ["nombre"],
+                },
+                {
+                    model: ProductoSequelize,
+                    attributes: ["titulo", "precio"],
+            }],
+            attributes: ["fecha_venta", "cantidad"],
+            order: [["fecha_venta", "DESC"]],
+        })
+        res.status(200).json(ventas);
         
     }catch(error){
         console.error(error);
@@ -16,22 +29,34 @@ router.get("/", async(req,res)=> {
     }
 })
 
-//subir el carrito a ventas
 router.post("/", async (req, res) => {
     try {
-        const carrito = req.body.carrito || [];
-        for (const producto of carrito) {
-            await VentaSequelize.create({
-                id_cliente: req.body.id_cliente,
-                id_producto: producto.id_producto,
-                cantidad: producto.cantidadElegida,
-            });
+        if (!req.body.nombre_cliente) {
+            return res.status(400).json({ error: "Nombre del cliente es requerido" });
         }
+        const cliente = await ClienteSequelize.create({nombre: req.body.nombre_cliente});
+        
+        const obtenerCliente = await ClienteSequelize.findOne({
+            where:{
+                nombre: req.body.nombre_cliente,
+            }
+        });
 
-        res.status(201).json({ mensaje: "Venta registrada correctamente." });
+        const carrito = req.body.carrito;
+
+        const ventas = carrito.map(producto => ({
+            id_cliente: obtenerCliente.id_cliente,
+            id_producto: producto.id,
+            cantidad: producto.cantidadElegida,
+            fecha: Date.now()
+        }));
+
+        await VentaSequelize.bulkCreate(ventas);
+
+        res.status(201).json({ message: "Ventas registradas" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Error al registrar la venta." });
+        res.status(500).json({ error: "Error al registrar venta" });
     }
 });
 
@@ -41,7 +66,7 @@ router.post("/ticket", (req, res) => {
     let totalCompra = 0;
 
     carrito.forEach(p => {
-        totalCompra += p.precio * p.cantidadElegida;
+        totalCompra += (p.precio * p.cantidadElegida);
     });
 
     res.render("ticket", { carrito, totalCompra });
