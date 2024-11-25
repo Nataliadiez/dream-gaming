@@ -43,7 +43,6 @@ const pintarTicket = async() => {
 const imprimirTicket = () => {
     html2canvas(contenedorTicket)
     .then(canvas => {
-        //convierte el canva en una imagen
         const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF("p", "pt", "a4");
         pdf.addImage(imgData, 'PNG', 0, 0);

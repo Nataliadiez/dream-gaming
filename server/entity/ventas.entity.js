@@ -1,42 +1,32 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db/sequelizeConnection.js");
 const Cliente = require("./cliente.entity.js");
-const Producto = require("./producto.entity.js");
 
-const VentasSequelize = sequelize.define("Ventas", 
+const VentaSequelize = sequelize.define("Venta", 
 {
-    id_cliente:{
+    id_venta: {
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
+    },
+    id_cliente: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: Cliente,
             key: "id_cliente",
         },
-        allowNull: false,
     },
-    id_producto:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: Producto,
-            key: "id_producto",
-        },
-        allowNull: false,
-    },
-    cantidad:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    fecha_venta: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
     }
 },
 {
     timestamps: false, // Desactiva createdAt y updatedAt
-}
-);
+});
 
-Cliente.hasMany(VentasSequelize, { foreignKey: "id_cliente" });
-VentasSequelize.belongsTo(Cliente, { foreignKey: "id_cliente", targetKey: "id_cliente" });
+Cliente.hasMany(VentaSequelize, { foreignKey: "id_cliente" });
+VentaSequelize.belongsTo(Cliente, { foreignKey: "id_cliente" });
 
-Producto.hasMany(VentasSequelize, { foreignKey: "id_producto" });
-VentasSequelize.belongsTo(Producto, { foreignKey: "id_producto", targetKey: "id_producto"  });
-
-module.exports = VentasSequelize;
+module.exports = VentaSequelize;

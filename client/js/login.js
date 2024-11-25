@@ -10,7 +10,8 @@ const selectors = {
     linkLogin: document.querySelector("#link-loguearse"),
     linkRegister: document.querySelector("#link-registrarse"),
     seccionLogin: document.querySelector("#section-login"),
-    seccionProductos: document.querySelector("#section-productos")
+    seccionProductos: document.querySelector("#section-productos"),
+    btnDescargarVentas: document.querySelector("#btn-descargar-ventas")
 };
 
 
@@ -150,6 +151,8 @@ const admin = {
         const formProducto = document.querySelector("#form-producto");
         const btnCerrarSesion = document.querySelector("#btn-cerrar-sesion");
         const btnLimpiarForm = document.querySelector("#btn-limpiar-form");
+        const btnDescargarVentas = document.querySelector("#btn-descargar-ventas"); //TODO:
+        btnDescargarVentas.addEventListener("click", ()=>alert("descargar ventas!"))
 
         if (btnCerrarSesion) {
             btnCerrarSesion.addEventListener("click", () => auth.cerrarSesion());
@@ -274,13 +277,12 @@ const admin = {
             const precioInput = document.querySelector("#precio-producto") || 0;
             const descripcionInput = document.querySelector("#descripcion-producto") || "";
             const categoriaInput = document.querySelector("#categoria-producto") || "procesadores";
-            const disponibleInput = document.querySelector("#disponible-producto");
+            const disponibleInput = document.querySelector("#disponible-producto") || 1;
             
 
             if (idInput) idInput.value = producto.id_producto;
             if (tituloInput) tituloInput.value = producto.titulo;
             if (precioInput) precioInput.value = producto.precio;
-            //TODO: modificar para subir la imagen
             if (descripcionInput) descripcionInput.value = producto.descripcion || '';
             if (categoriaInput) categoriaInput.value = producto.categoria;
             if (disponibleInput) disponibleInput.checked = 1;
@@ -331,12 +333,12 @@ selectors.btnIngresar.addEventListener("click", () => {
 
 selectors.btnAccesoRapido.addEventListener("click", async () => {
     try {
-        const response = await fetch("http://localhost:3000/usuarios/inicio-rapido"); // Llamada al endpoint de inicio rápido
+        const response = await fetch("http://localhost:3000/usuarios/inicio-rapido");
         const data = await response.json();
 
         if (data.success) {
             selectors.emailInput.value = data.email;
-            selectors.passwordInput.value = data.password; // Contraseña desencriptada
+            selectors.passwordInput.value = data.password;
         } else {
             Swal.fire({
                 title: 'Error en acceso rápido',
