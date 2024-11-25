@@ -3,12 +3,11 @@ const router = express.Router();
 const ClienteSequelize = require("../entity/cliente.entity.js");
 const ProductoSequelize = require("../entity/producto.entity.js");
 const VentaSequelize = require("../entity/ventas.entity.js");
-const { DATE } = require("sequelize");
 
 //obtener todas las ventas
 router.get("/", async(req,res)=> {
     try{
-        const ventas = VentaSequelize.findAll({
+        const ventas = await VentaSequelize.findAll({
             include: [
                 {
                     model: ClienteSequelize,
@@ -17,10 +16,12 @@ router.get("/", async(req,res)=> {
                 {
                     model: ProductoSequelize,
                     attributes: ["titulo", "precio"],
-            }],
+                }
+            ],
             attributes: ["fecha_venta", "cantidad"],
             order: [["fecha_venta", "DESC"]],
-        })
+            raw: true,
+        });
         res.status(200).json(ventas);
         
     }catch(error){

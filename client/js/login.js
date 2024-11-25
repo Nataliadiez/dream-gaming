@@ -14,7 +14,6 @@ const selectors = {
     btnDescargarVentas: document.querySelector("#btn-descargar-ventas")
 };
 
-
 const verificarAutenticacion = async() => {
     const email = localStorage.getItem("usuarioLogueado");
 
@@ -151,8 +150,43 @@ const admin = {
         const formProducto = document.querySelector("#form-producto");
         const btnCerrarSesion = document.querySelector("#btn-cerrar-sesion");
         const btnLimpiarForm = document.querySelector("#btn-limpiar-form");
-        const btnDescargarVentas = document.querySelector("#btn-descargar-ventas"); //TODO:
-        btnDescargarVentas.addEventListener("click", ()=>alert("descargar ventas!"))
+        const btnDescargarVentas = document.querySelector("#btn-descargar-ventas");
+        btnDescargarVentas.addEventListener("click", async () => {
+            try {
+                const respuesta = await fetch("http://localhost:3000/ventas");
+        
+                if (!respuesta.ok) {
+                    throw new Error('Error al obtener las ventas');
+                }
+        
+                const data = await respuesta.json();
+                console.log(data);
+        
+                const ventas = data.map((venta) => ({
+                    Cliente: venta["Cliente.nombre"],
+                    Producto: venta["Producto.titulo"],
+                    Precio: venta["Producto.precio"],
+                    Cantidad: venta.cantidad,
+                    FechaVenta: venta.fecha_venta
+                }));
+        
+                if (ventas.length === 0) {
+                    throw new Error('No hay datos de ventas para agregar a la hoja');
+                }
+        
+                const hojaCalculo = XLSX.utils.json_to_sheet(ventas);
+        
+                const libroTrabajo = XLSX.utils.book_new();
+        
+                XLSX.utils.book_append_sheet(libroTrabajo, hojaCalculo, "Ventas");
+        
+                XLSX.writeFile(libroTrabajo, "ventas.xlsx");
+        
+            } catch (error) {
+                console.error('Hubo un error en la solicitud:', error);
+            }
+        });
+        
 
         if (btnCerrarSesion) {
             btnCerrarSesion.addEventListener("click", () => auth.cerrarSesion());
@@ -227,7 +261,6 @@ const admin = {
         }
     },
     
-
     async cargarProductos() {
         try {
             const response = await fetch('http://localhost:3000/productos');
