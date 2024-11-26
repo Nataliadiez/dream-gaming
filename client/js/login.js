@@ -39,7 +39,9 @@ const auth = {
         if (email && password) {
             await Usuario.login(email, password);
             this.limpiarCampos();
+            
             location.reload();
+            
         } else {
             Swal.fire({
                 title: 'Error!',

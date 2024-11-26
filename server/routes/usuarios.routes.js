@@ -20,5 +20,4 @@ router.post('/register', registroDeUsuario);
 // Loguear un usuario
 router.post('/login', loguearUsuario);
 
-
 module.exports = router;

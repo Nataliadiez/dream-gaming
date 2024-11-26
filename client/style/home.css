@@ -63,7 +63,8 @@
     padding: 5% 2%;
     justify-content: center;
     align-items: center;
-    grid-template-columns: repeat(2, 1fr); /* Por defecto, dos columnas */
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 150px;
 }
 
 #img-productos a img {

@@ -41,13 +41,13 @@ const pintarTicket = async() => {
 
     const response_venta = await fetch("http://localhost:3000/ventas", {
         method: "POST",
-        header:{
+        headers: {
             'Content-Type': 'application/json',
         },
-        body:{
-            carrito: JSON.stringify({ carrito }), 
-            nombre_cliente: "Natt",
-        }
+        body: JSON.stringify({
+            carrito: carrito, 
+            nombre_cliente: cliente,
+        })
     });
 
     console.log(response_venta.json());
