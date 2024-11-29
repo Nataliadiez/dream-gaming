@@ -27,7 +27,7 @@ const cargarProductoDetalle = async () => {
         <div class="card mb-3 contenido-producto">
             <div class="row g-0 contenido-reducido">
                 <div class="col-md-4">
-                    <img src="${producto.imagen}" class="img-fluid rounded-start" alt="...">
+                    <img src="/server/uploads/${producto.imagen}" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body card-theme">

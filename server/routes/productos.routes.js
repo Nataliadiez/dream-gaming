@@ -7,6 +7,7 @@ const {
     editarProducto,
     eliminarProductoLogicamente,
     obtenerVistaProducto,
+    reactivarProductoLogicamente,
     upload
 } = require("../controllers/productos.controller.js");
 const validarProductos = require("../middlewares/validarProductos.middleware.js");
@@ -21,10 +22,13 @@ router.get("/:id", obtenerUnProducto);
 router.post("/", upload.single("imagen"), validarProductos, crearProducto);
 
 // Editar un producto
-router.put("/:id", upload.single("imagen"), editarProducto);
+router.put("/:id", upload.single("imagen"), validarProductos, editarProducto);
 
 // Baja lógica del producto
 router.delete("/:id", eliminarProductoLogicamente);
+
+//Reactivación lógida del producto
+router.patch("/:id", reactivarProductoLogicamente)
 
 // Vista de productos con paginación
 router.get("/producto/:id", obtenerVistaProducto);

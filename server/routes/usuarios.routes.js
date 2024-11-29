@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const validarUsuario = require("../middlewares/validarUsuario.middleware.js");
 
 const {
     obtenerUsuarios,
@@ -15,7 +16,7 @@ router.get('/', obtenerUsuarios);
 router.get("/inicio-rapido", inicioSesionRapido);
 
 // Registrar un usuario
-router.post('/register', registroDeUsuario);
+router.post('/register', validarUsuario, registroDeUsuario);
 
 // Loguear un usuario
 router.post('/login', loguearUsuario);

@@ -7,10 +7,10 @@ const path = require('path');
 
 const sequelize = require("./db/sequelizeConnection.js");
 
-const ProductoSequelize = require("./entity/producto.entity.js");
-const ClienteSequelize = require("./entity/cliente.entity.js");
-const VentasSequelize = require("./entity/ventas.entity.js");
-const UsuarioSequelize = require("./entity/usuario.entity.js");
+const ProductoSequelize = require("./models/producto.entity.js");
+const ClienteSequelize = require("./models/cliente.entity.js");
+const VentasSequelize = require("./models/ventas.entity.js");
+const UsuarioSequelize = require("./models/usuario.entity.js");
 
 //parsea lo que llegue del body
 app.use(bodyParser.json());
@@ -28,9 +28,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //rutas
 app.get("/", async (req, res)=> {
-    await sequelize.sync({force: true});
-    res.send("pagina principal");
-
+    await sequelize.sync({ alter: true });
+    res.send("Pagina principal");
 })
 
 app.use("/", router);

@@ -79,6 +79,7 @@ input[type=number]::-webkit-outer-spin-button {
 .contenedorCantidad{
     display: flex;
     align-items: center;
+    margin-top: 15px;
 }
 
 .modal-content{

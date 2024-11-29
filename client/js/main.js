@@ -223,7 +223,6 @@ function actualizarEstadoTema(){
 }
 //----------------------------------------
 
-
 const miprueba = document.querySelector("#prueba");
 const btnCambioTema = document.querySelector("#btn-modo");
 const contenedorCards = document.querySelector("#cards-container");

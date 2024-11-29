@@ -1,6 +1,6 @@
-const ClienteSequelize = require("../entity/cliente.entity.js");
-const ProductoSequelize = require("../entity/producto.entity.js");
-const VentaSequelize = require("../entity/ventas.entity.js");
+const ClienteSequelize = require("../models/cliente.entity.js");
+const ProductoSequelize = require("../models/producto.entity.js");
+const VentaSequelize = require("../models/ventas.entity.js");
 
 const obtenerTodasLasVentas = async(req,res)=> {
     try{

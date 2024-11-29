@@ -1,4 +1,4 @@
-const ProductoSequelize = require("../entity/producto.entity.js");
+const ProductoSequelize = require("../models/producto.entity.js");
 const multer = require("multer");
 const path = require("path");
 const fs = require('fs');
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         cb(null, uploadsDir);
     },
     filename: (req, file, cb) => {
-        const uniqueName = `${Date.now()}-${file.originalname}`;
+        const uniqueName = `${file.originalname}`;
         cb(null, uniqueName);
     }
 });
@@ -24,13 +24,16 @@ const upload = multer({ storage });
 // Obtener todos los productos
 const obtenerProductos = async (req, res) => {
     try {
-        const productos = await ProductoSequelize.findAll();
+        const productos = await ProductoSequelize.findAll({
+            order: [['id_producto', 'DESC']]
+        });
         res.json(productos);
     } catch (error) {
         console.error(error);
         res.status(500).send({ error: "Error del servidor" });
     }
 };
+
 
 // Obtener un producto
 const obtenerUnProducto = async (req, res) => {
@@ -47,27 +50,28 @@ const obtenerUnProducto = async (req, res) => {
     }
 };
 
+
 // Subir producto nuevo
 const crearProducto = async (req, res) => {
     try {
         if (!req.file) {
-            return res.status(400).json({ error: "No se ha subido ninguna imagen" });
+            return res.status(400).json({ error: "No se ha subido ninguna imagen." });
         }
 
-        const imagenPath = `../../server/uploads/${req.file.filename}`;
+        const imagenPath = `${req.file.filename}`;
         const nuevoProducto = await ProductoSequelize.create({
-            ...req.body,
+            titulo: req.body.titulo,
+            descripcion: req.body.descripcion,
+            precio: parseFloat(req.body.precio),
+            categoria: req.body.categoria,
+            disponible: true,
             imagen: imagenPath
         });
 
-        if (nuevoProducto) {
-            res.status(201).json({
-                mensaje: "Producto creado exitosamente",
-                producto: nuevoProducto
-            });
-        } else {
-            return res.status(400).json({ error: "No se pudo crear el producto" });
-        }
+        res.status(201).json({
+            mensaje: "Producto creado exitosamente",
+            producto: nuevoProducto
+        });
     } catch (error) {
         console.error("Error al crear producto:", error);
         res.status(500).json({ error: "Error al crear el producto" });
@@ -84,37 +88,42 @@ const editarProducto = async (req, res) => {
 
         let imagenPath = productoExistente.imagen;
         if (req.file) {
-            imagenPath = `../../server/uploads/${req.file.filename}`;
-            if (productoExistente.imagen) {
-                const oldImagePath = path.join(__dirname, '..', productoExistente.imagen);
-                if (fs.existsSync(oldImagePath)) {
-                    fs.unlinkSync(oldImagePath);
-                }
+            imagenPath = `${req.file.filename}`;
+            const oldImagePath = path.join(__dirname, '..', productoExistente.imagen);
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
             }
         }
 
-        const productoModificado = await ProductoSequelize.update({
-            ...req.body,
+        const actualizacion = {
+            titulo: req.body.titulo || productoExistente.titulo,
+            descripcion: req.body.descripcion || productoExistente.descripcion,
+            precio: req.body.precio ? parseFloat(req.body.precio) : productoExistente.precio,
+            categoria: req.body.categoria || productoExistente.categoria,
+            disponible: req.body.disponible !== undefined ? req.body.disponible === "true" : productoExistente.disponible,
             imagen: imagenPath
-        }, {
+        };
+
+        const resultado = await ProductoSequelize.update(actualizacion, {
             where: {
                 id_producto: req.params.id
             }
         });
 
-        if (productoModificado[0] > 0) {
+        if (resultado[0] > 0) {
             res.status(200).json({
                 mensaje: "Producto actualizado exitosamente",
-                imagen: imagenPath
+                producto: actualizacion
             });
         } else {
-            return res.status(400).json({ error: "No se pudo actualizar el producto" });
+            res.status(400).json({ error: "No se pudo actualizar el producto" });
         }
     } catch (error) {
         console.error("Error al actualizar producto:", error);
         res.status(500).json({ error: "Error al actualizar el producto" });
     }
 };
+
 
 // Baja lógica del producto
 const eliminarProductoLogicamente = async (req, res) => {
@@ -137,40 +146,57 @@ const eliminarProductoLogicamente = async (req, res) => {
     }
 };
 
+const reactivarProductoLogicamente = async (req, res) => {
+    try {
+        const productoReactivado = await ProductoSequelize.update({
+            disponible: true
+        }, {
+            where: {
+                id_producto: req.params.id
+            }
+        });
+
+        if (productoReactivado) {
+            return res.send({ mensaje: "Producto reactivado exitosamente" });
+        } else {
+            return res.status(404).json({ error: "Producto no modificado" });
+        }
+    } catch (error) {
+        res.status(500).send({ error: "Error del servidor" });
+    }
+};
+
 // Vista de productos con paginación
 const obtenerVistaProducto = async (req, res) => {
-    let tamano = 6;
+    const tamano = 6;
     const { id } = req.params;
     const { categoria } = req.query;
-    let offset = (parseInt(id) - 1) * tamano;
-
+    
+    let paginaActual = Math.max(1, parseInt(id));
+    
     let whereClause = { disponible: true };
     if (categoria) {
         whereClause.categoria = categoria;
     }
 
-    let totalProductos = await ProductoSequelize.count({ where: whereClause });
-    while (offset > totalProductos) {
-        offset -= tamano;
-    }
-
-    let productos = await ProductoSequelize.findAll({
+    const totalProductos = await ProductoSequelize.count({ where: whereClause });
+    const totalPaginas = Math.ceil(totalProductos / tamano);
+    paginaActual = Math.min(paginaActual, totalPaginas);
+    const offset = (paginaActual - 1) * tamano;
+    
+    const productos = await ProductoSequelize.findAll({
         where: whereClause,
         limit: tamano,
-        offset,
+        offset: offset,
     });
-
-    if (!productos) {
-        offset = (parseInt(id) - 2) * tamano;
-        productos = await ProductoSequelize.findAll({
-            where: whereClause,
-            limit: tamano,
-            offset,
-        });
-    }
-
-    res.render("productos", { productos });
+    
+    res.render("productos", { 
+        productos, 
+        paginaActual, 
+        totalPaginas 
+    });
 };
+
 
 module.exports = {
     obtenerProductos,
@@ -179,5 +205,6 @@ module.exports = {
     editarProducto,
     eliminarProductoLogicamente,
     obtenerVistaProducto,
+    reactivarProductoLogicamente,
     upload
 };

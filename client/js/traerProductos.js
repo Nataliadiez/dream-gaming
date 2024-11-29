@@ -1,24 +1,25 @@
 const params = new URLSearchParams(window.location.search);
 const categoria = params.get("categoria");
-
-
 const linkProducto = `<link rel="stylesheet" href="./style/home.css" />`;
 document.head.insertAdjacentHTML("beforeend", linkProducto);
 
 const siguiente = document.getElementById("siguiente");
 const anterior = document.getElementById("anterior");
 
-let pagina = 1;
+let paginaActual = 1;
+let totalPaginas = 1;
 
-function PaginaSiguiente(){
-    pagina += 1;
-    cargarProductos(pagina);
+function PaginaSiguiente() {
+    if (paginaActual < totalPaginas) {
+        paginaActual += 1;
+        cargarProductos(paginaActual);
+    }
 }
 
-function PaginaAnterior(){
-    if(pagina > 1){
-        pagina -= 1;
-        cargarProductos(pagina);
+function PaginaAnterior() {
+    if (paginaActual > 1) {
+        paginaActual -= 1;
+        cargarProductos(paginaActual);
     }
 }
 
@@ -28,17 +29,24 @@ const cargarProductos = async (num) => {
         if (categoria) {
             url += `?categoria=${categoria}`;
         }
+        
         const respuesta = await fetch(url);
         if (!respuesta.ok) {
             throw new Error("Error en la respuesta del servidor");
         }
-
+        
         const html = await respuesta.text();
         const container = document.querySelector("#cards-container");
-
         container.innerHTML = "";
         container.insertAdjacentHTML("beforeend", html);
-
+        
+        const totalPaginasElement = document.querySelector('#total-paginas');
+        if (totalPaginasElement) {
+            totalPaginas = parseInt(totalPaginasElement.value);
+        }
+        
+        siguiente.disabled = paginaActual >= totalPaginas;
+        anterior.disabled = paginaActual <= 1;
     } catch (error) {
         console.error("Error al cargar los productos:", error);
     }
@@ -46,4 +54,4 @@ const cargarProductos = async (num) => {
 
 siguiente.addEventListener("click", PaginaSiguiente);
 anterior.addEventListener("click", PaginaAnterior);
-document.addEventListener("DOMContentLoaded", () => cargarProductos(pagina));
+document.addEventListener("DOMContentLoaded", () => cargarProductos(paginaActual));

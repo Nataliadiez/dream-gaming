@@ -36,7 +36,7 @@ const cargarCarrito = () => {
     carrito.forEach(producto => {
         const contenido = `
         <div class="unidadCompra">
-            <img class="imgProducto" src="${producto.imagen}" alt="">
+            <img class="imgProducto" src="/server/uploads/${producto.imagen}" alt="">
             <div class="div-col">
                 <h5 id="tituloProducto">${producto.titulo}</h5>
             </div>

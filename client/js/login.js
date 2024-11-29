@@ -11,7 +11,7 @@ const selectors = {
     linkRegister: document.querySelector("#link-registrarse"),
     seccionLogin: document.querySelector("#section-login"),
     seccionProductos: document.querySelector("#section-productos"),
-    btnDescargarVentas: document.querySelector("#btn-descargar-ventas")
+    btnDescargarVentas: document.querySelector("#btn-descargar-ventas"),
 };
 
 const verificarAutenticacion = async() => {
@@ -60,7 +60,7 @@ const auth = {
             await Usuario.register(email, password);
             this.limpiarCampos();
         } else {
-            Swal.fire({
+            await Swal.fire({
                 title: 'Error!',
                 text: 'Los campos no pueden estar vacíos',
                 icon: 'error',
@@ -105,7 +105,7 @@ const admin = {
                         <input id="imagen-producto" type="file" name="foto" accept="image/*">
                         
                         <label for="descripcion">Descripción</label>
-                        <textarea id="descripcion-producto"></textarea>
+                        <textarea id="descripcion-producto" required></textarea>
 
                         <label for="categoria">Categoría</label>
                         <select id="categoria-producto" required>
@@ -113,11 +113,6 @@ const admin = {
                             <option value="placas">Placas de Video</option>
                             <option value="memorias">Memorias RAM</option>
                         </select>
-
-                        <div class="form-check">
-                            <input type="checkbox" id="disponible-producto" checked>
-                            <label for="disponible">Disponible</label>
-                        </div>
 
                         <div class="admin-buttons">
                             <button type="submit" class="btn-form-login" id="btn-guardar-producto">
@@ -143,6 +138,9 @@ const admin = {
         selectors.seccionProductos.innerHTML = `
                 <div class="productos-list">
                     <h3>Listado de Productos</h3>
+                    <button class="btn btn-primary" id="btn-placas">placas</button>
+                    <button class="btn btn-primary" id="btn-memorias">memorias</button>
+                    <button class="btn btn-primary" id="btn-procesadores">procesadores</button>
                     <div id="productos-container"></div>
                 </div>`
         this.setupAdminEventListeners();
@@ -153,6 +151,10 @@ const admin = {
         const btnCerrarSesion = document.querySelector("#btn-cerrar-sesion");
         const btnLimpiarForm = document.querySelector("#btn-limpiar-form");
         const btnDescargarVentas = document.querySelector("#btn-descargar-ventas");
+        const btnMemorias = document.querySelector("#btn-memorias");
+        const btnPlacas = document.querySelector("#btn-placas");
+        const btnProcesadores = document.querySelector("#btn-procesadores");
+        
         btnDescargarVentas.addEventListener("click", async () => {
             try {
                 const respuesta = await fetch("http://localhost:3000/ventas");
@@ -189,6 +191,15 @@ const admin = {
             }
         });
         
+        btnMemorias.addEventListener("click", ()=>{
+            this.cargarProductos("memorias");
+        })
+        btnProcesadores.addEventListener("click", ()=>{
+            this.cargarProductos("procesadores");
+        })
+        btnPlacas.addEventListener("click", ()=>{
+            this.cargarProductos("placas");
+        })
 
         if (btnCerrarSesion) {
             btnCerrarSesion.addEventListener("click", () => auth.cerrarSesion());
@@ -219,7 +230,6 @@ const admin = {
             imagen: imagenInput.files[0],
             descripcion: document.querySelector("#descripcion-producto").value,
             categoria: document.querySelector("#categoria-producto").value,
-            disponible: document.querySelector("#disponible-producto").checked ? 1 : 0
         };
     },
 
@@ -247,12 +257,19 @@ const admin = {
     
             if (!response.ok) {
                 const error = await response.json();
+                await Swal.fire({
+                    title: 'Error al guardar el producto',
+                    text: await error.error,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
                 throw new Error(error.error || 'Error al guardar el producto');
+                
             }
             const data = await response.json();
             await Swal.fire({
                 title: 'Correcto!',
-                text: data.mensaje,
+                text: await data.mensaje,
                 icon: 'success',
                 confirmButtonText: 'Ok'
             })
@@ -262,18 +279,26 @@ const admin = {
             throw error;
         }
     },
-    
-    async cargarProductos() {
+    async traerProductos() {
         try {
             const response = await fetch('http://localhost:3000/productos');
             const productos = await response.json();
+            return productos;
+        } catch (error) {
+            console.error("Error al traerproductos:", error);
+        }
+    },
+    async cargarProductos(categoria) {
+        try {
+            const productos = await this.traerProductos();
+            const productosFiltrados = productos.filter(producto => producto.categoria === categoria);
             
             const productosContainer = document.querySelector("#productos-container");
             if (productosContainer) {
-                productosContainer.innerHTML = productos.map(producto => `
+                productosContainer.innerHTML = productosFiltrados.map(producto => `
                     <div class="producto-card">
                         <div class="producto-imagen">
-                            <img src="${producto.imagen}" alt="${producto.titulo}">
+                            <img src="/server/uploads/${producto.imagen}" alt="${producto.titulo}">
                         </div>
                         <div class="producto-info">
                             <h4>${producto.titulo}</h4>
@@ -291,6 +316,9 @@ const admin = {
                                 </button>
                                 <button onclick="admin.eliminarProducto(${producto.id_producto})" class="btn-form-login">
                                     Eliminar
+                                </button>
+                                <button onclick="admin.reactivarProducto(${producto.id_producto})" class="btn-form-login">
+                                    Reactivar
                                 </button>
                             </div>
                         </div>
@@ -312,7 +340,6 @@ const admin = {
             const precioInput = document.querySelector("#precio-producto") || 0;
             const descripcionInput = document.querySelector("#descripcion-producto") || "";
             const categoriaInput = document.querySelector("#categoria-producto") || "procesadores";
-            const disponibleInput = document.querySelector("#disponible-producto") || 1;
             
 
             if (idInput) idInput.value = producto.id_producto;
@@ -320,11 +347,10 @@ const admin = {
             if (precioInput) precioInput.value = producto.precio;
             if (descripcionInput) descripcionInput.value = producto.descripcion || '';
             if (categoriaInput) categoriaInput.value = producto.categoria;
-            if (disponibleInput) disponibleInput.checked = 1;
 
             const imagenActual = document.querySelector("#imagen-actual");
             if (imagenActual) {
-                imagenActual.src = producto.imagen || "";
+                imagenActual.src = `/server/uploads/${producto.imagen}` || "";
                 imagenActual.alt = `Imagen de ${producto.titulo}`;
             }
         } catch (error) {
@@ -333,32 +359,77 @@ const admin = {
     },
 
     async eliminarProducto(id) {
-        if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+        const resultado = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo',
+            cancelButtonText: 'Cancelar'
+        });
+    
+        if (resultado.isConfirmed) {
             try {
                 const response = await fetch(`http://localhost:3000/productos/${id}`, {
                     method: 'DELETE'
                 });
-
+    
                 if (response.ok) {
                     await this.cargarProductos();
-                    Swal.fire({
-                        title: 'Correcto!',
+                    await Swal.fire({
+                        title: '¡Eliminado!',
                         text: 'Producto eliminado exitosamente',
                         icon: 'success',
                         confirmButtonText: 'Ok'
-                    })
+                    });
+                } else {
+                    throw new Error('Respuesta no OK');
                 }
             } catch (error) {
                 console.error("Error al eliminar el producto:", error);
                 await Swal.fire({
-                    title: 'Error!',
-                    text: 'Error al eliminar el producto',
+                    title: 'Error',
+                    text: 'Hubo un problema al eliminar el producto.',
                     icon: 'error',
                     confirmButtonText: 'Ok'
-                })
+                });
             }
+        } else {
+            // Opción de cancelar, no se hace nada.
+            console.log('El usuario canceló la eliminación.');
         }
-    }
+    },
+    async reactivarProducto(id) {
+            try {
+                const response = await fetch(`http://localhost:3000/productos/${id}`, {
+                    method: 'PATCH'
+                });
+    
+                if (response.ok) {
+                    await this.cargarProductos();
+                    await Swal.fire({
+                        title: 'Reactivado!',
+                        text: 'Producto activo',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
+                } else {
+                    throw new Error('Respuesta no OK');
+                }
+            } catch (error) {
+                console.error("Error al reactivar el producto:", error);
+                await Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al reactivar el producto.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            }
+    },
+    
+    
 };
 
 document.addEventListener("DOMContentLoaded", () => auth.verificarAutenticacion());
@@ -382,7 +453,7 @@ selectors.btnAccesoRapido.addEventListener("click", async () => {
         } else {
             await Swal.fire({
                 title: 'Error en acceso rápido',
-                text: data.message,
+                text: await data.message,
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
@@ -401,5 +472,6 @@ selectors.linkLogin.addEventListener("click", () => {
 selectors.linkRegister.addEventListener("click", () => {
     selectors.tituloForm.innerHTML = "Formulario de Registro";
 });
+
 
 window.admin = admin;

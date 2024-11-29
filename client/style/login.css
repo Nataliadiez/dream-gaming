@@ -67,6 +67,10 @@ body::before {
     border: none;
     cursor: pointer;
 }
+.btn-form-login:hover {
+    color: red;
+    box-shadow: 0px 0px 5px rgb(234, 211, 255);
+}
 
 .btn:hover {
     background-color: #555;
@@ -214,6 +218,16 @@ input:focus{
     overflow-y: auto;
     background-color: #0B0C2E;
     width: 100%;
+}
+
+#btn-procesadores, #btn-placas, #btn-memorias{
+    border: solid 1px #F0B4FF;
+    background-color: #0B0C2E;
+    color: #F0B4FF;
+}
+
+#btn-procesadores:hover, #btn-placas:hover, #btn-memorias:hover{
+    box-shadow: 0px 0px 10px rgb(231, 202, 255);
 }
 
 /* MEDIA QUERIES */

@@ -25,7 +25,6 @@ class Usuario {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
             });
-    
             if (response.ok) {
                 localStorage.setItem("usuarioLogueado", email);
                 await Swal.fire({

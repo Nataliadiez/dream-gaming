@@ -1,4 +1,4 @@
-const UsuarioSequelize = require("../entity/usuario.entity.js");
+const UsuarioSequelize = require("../models/usuario.entity.js");
 const crypto = require("crypto");
 const claveSecretaDelServer = process.env.CLAVE_SECRETA;
 const algoritmo = "aes-256-cbc";
