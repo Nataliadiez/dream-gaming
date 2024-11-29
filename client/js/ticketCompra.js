@@ -65,7 +65,12 @@ const imprimirTicket = () => {
 }
 const comprarNuevamente = () => {
     localStorage.clear();
-    alert("Se borró correctamente!");
+    Swal.fire({
+        title: 'Correcto!',
+        text: 'Historial eliminado',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    })
     window.location.href = "index.html"
 }
 

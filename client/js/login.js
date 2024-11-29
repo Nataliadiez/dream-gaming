@@ -40,10 +40,10 @@ const auth = {
             await Usuario.login(email, password);
             this.limpiarCampos();
             
-            location.reload();
+            await location.reload();
             
         } else {
-            Swal.fire({
+            await Swal.fire({
                 title: 'Error!',
                 text: 'Los campos no pueden estar vacíos',
                 icon: 'error',
@@ -250,7 +250,7 @@ const admin = {
                 throw new Error(error.error || 'Error al guardar el producto');
             }
             const data = await response.json();
-            Swal.fire({
+            await Swal.fire({
                 title: 'Correcto!',
                 text: data.mensaje,
                 icon: 'success',
@@ -341,11 +341,16 @@ const admin = {
 
                 if (response.ok) {
                     await this.cargarProductos();
-                    alert('Producto eliminado exitosamente');
+                    Swal.fire({
+                        title: 'Correcto!',
+                        text: 'Producto eliminado exitosamente',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
                 }
             } catch (error) {
                 console.error("Error al eliminar el producto:", error);
-                Swal.fire({
+                await Swal.fire({
                     title: 'Error!',
                     text: 'Error al eliminar el producto',
                     icon: 'error',
@@ -375,7 +380,7 @@ selectors.btnAccesoRapido.addEventListener("click", async () => {
             selectors.emailInput.value = data.email;
             selectors.passwordInput.value = data.password;
         } else {
-            Swal.fire({
+            await Swal.fire({
                 title: 'Error en acceso rápido',
                 text: data.message,
                 icon: 'error',

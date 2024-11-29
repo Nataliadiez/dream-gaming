@@ -96,7 +96,6 @@ footer {
     font-size: 1rem;
 }
 
-
 .social-icons {
     display: flex;
     gap: 50px;
@@ -116,6 +115,9 @@ footer {
 .modal-content{
     background: linear-gradient(#3c164d, rgb(49, 6, 40));
     color: #ffeafb;
+}
+#textHelp{
+    color: white
 }
 #btn-modal{
     color: #e295c5;

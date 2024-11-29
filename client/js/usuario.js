@@ -28,18 +28,29 @@ class Usuario {
     
             if (response.ok) {
                 localStorage.setItem("usuarioLogueado", email);
+                await Swal.fire({
+                    title: 'Exito!',
+                    text: `Usuario logueado correctamente ${email}`,
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
             } else {
                 const result = await response.json();
-                Swal.fire({
+                await Swal.fire({
                     title: 'Error!',
                     text: result.message,
                     icon: 'error',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 })
             }
         } catch (error) {
             console.error("Error al realizar el login:", error);
-            alert("Error en el servidor. Inténtelo nuevamente más tarde.");
+            await Swal.fire({
+                title: 'Error!',
+                text: "Error en el servidor. Inténtelo nuevamente más tarde.",
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
         }
     }
 
@@ -54,18 +65,18 @@ class Usuario {
             const result = await response.json();
 
             if (result.success) {
-                Swal.fire({
+                await Swal.fire({
                     title: 'correcto!',
                     text: result.message,
                     icon: 'success',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 })
             } else {
-                Swal.fire({
+                await Swal.fire({
                     title: 'Error!',
                     text: result.message,
                     icon: 'error',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 })
             }
         } catch (error) {
